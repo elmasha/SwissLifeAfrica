@@ -61,7 +61,7 @@
                                 <div class="text-center">
 
                                     <div class="container text-center">
-                                        <span style="font-size: 0.6rem; color: grey"> © Copyright Amac</span>
+                                        <span style="font-size: 0.6rem; color: grey"> © Copyright SwissLife</span>
                                         <span style="font-size: 0.6rem; color: grey"> All Rights Reserved</span><br />
 
                                     </div>
@@ -127,6 +127,7 @@ export default {
 }
 
 body {
+     font-family: "Quicksand", sans-serif;
     scroll-behavior: smooth;
     overflow: hidden;
 

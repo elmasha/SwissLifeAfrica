@@ -3,14 +3,14 @@
     <div>
         <v-app-bar light elevation="0" class="" color="white" fixed>
 
-            <v-app-bar-nav-icon v-show="showBurger"></v-app-bar-nav-icon>
+            <v-app-bar-nav-icon v-show="showBurger" ></v-app-bar-nav-icon>
 
             <v-toolbar-title>
                 <v-img :src="logo" contain width="120" height="30"></v-img>
             </v-toolbar-title>
 
             <v-spacer></v-spacer>
-            <div v-show="!showBurger" id="nav_bar_links">
+              <div v-show="!showBurger" id="nav_bar_links">
                 <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">Home</a>
                 <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">About</a>
                 <a id="link" @click.prevent="scrollToSection1('shop')" style="margin: 8px;">Shop</a>
@@ -39,95 +39,84 @@
     </div>
     <v-card color="white" elevation="0" style="margin-top: 40px;">
         <v-row justify="" v-resize="onResize">
-            <v-col cols="12" sm="12" md="12"></v-col>
-            <v-col cols="12" sm="12" md="12"></v-col>
+
+            <v-col cols="12" sm="12" md="12"> </v-col>
+
             <v-col cols="12" sm="12" md="12">
-                <div class="container">
+
+                <div class="container my-0">
                     <div class="d-flex">
                         <div>
-                            <h1 style="font-size: 1.9rem;">Certifications</h1>
+
+                            <h1 style="font-size: 1.9rem;">Shop</h1>
+
+                            <label for="">Categories</label>
+                            <v-chip-group column>
+                                 <v-chip color="black" text-color="white" small @click="Fetch_Products">All</v-chip>
+                                <v-chip color="black" text-color="white" small @click="search_with_categories('Energy')">Energy</v-chip>
+                                <v-chip color="black" outlined text-color="black" @click="search_with_categories('anti-aging')"  small>anti-aging</v-chip>
+                                <v-chip color="black" outlined text-color="black" @click="search_with_categories('Bones')" small>Bones</v-chip>
+                                <v-chip color="black" outlined text-color="black" @click="search_with_categories('Omega 3')" small>Omega 3</v-chip>
+                            </v-chip-group>
                         </div>
                         <v-spacer></v-spacer>
+                        <div class="my-8">
+                            <div>
+                                <div>
+                                    <span style="font-size: smaller;"> Business and companies </span> <br>
+                                    <span style="font-size: smaller;"> B2B bulk purchase</span> <br>
+
+                                    <v-btn large outlined rounded>
+                                        B2B / Bulk
+                                        <v-icon right dark>
+                                            mdi-truck-fast-outline
+                                        </v-icon>
+                                    </v-btn>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="">
+                        <v-row>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-text-field label="Search" @change="Search_Products(searchProduct)" v-model="searchProduct" placeholder="Search products" prepend-inner-icon="mdi-magnify" filled rounded dense></v-text-field>
+                            </v-col>
+                        </v-row>
 
                     </div>
-                </div>
-            </v-col>
+                    <div class="container  text-start">
+                        <div class="row">
 
-            <v-col cols="12" sm="12" md="12">
-                <div class="container">
-                    <v-row justify="">
+                            <div v-for="(product, id) in products" :key="id" class="col-md-3">
 
-                        <v-col cols="12" sm="12" md="4">
-                            <div class="container">
-                                <h4>Certified for Quality You Can Trust</h4>
+                                <v-card elevation="0">
+                                    <v-img :src="product.image_url" contain height="150"></v-img>
+                                    <v-card-subtitle>
+                                        <b style="font-size: 1.1rem; font-weight: 700; color: black;"> {{ product.name }}
+                                        </b>
+                                    </v-card-subtitle>
+                                    <v-card-text>
+                                        Now
+                                        <br>
+                                        <b style="font-size: 1.2rem; font-weight: 700; color: black;">Ksh {{ numeral( product.price).format("0,0") }}</b>
+                                    </v-card-text>
+                                    <v-card-actions>
 
-                                <p>
-                                    G&G are proud to be certified by the MHRA (Medicines
-                                    and Healthcare products Regulatory Agency), who
-                                    validate our Good Manufacturing Practices (GMP)
-                                    procedures.
-                                </p>
-                                <p>
-                                    In addition, G&G are members of the Health
-                                    Food Manufacturer’s Association, and are certified by
-                                    the Soil Association for the manufacture of organic
-                                    products, and the Vegetarian Society for the production
-                                    of vegan and vegetarian products.
-                                </p>
-                                <p>
-                                    passed inspections from a number of private and
-                                    government agencies, including the Food and Drug
-                                    Administration, Health Canada, and Environmental
-                                    Health
-                                </p>
-                                <p>
+                                        <v-btn rounded color="black" style="color: aliceblue;" small @click="add_Cart = true,quantity=1,cartProduct = product">Add to cart <v-icon>mdi-cart</v-icon>
+                                        </v-btn>
 
-                                </p>
-                                <div class="container">
-
-                                    <div class="row">
-
-                                        <v-img :src="ct1" contain height="100" />
-
-                                        <v-img :src="ct2" contain height="100" />
-
-                                        <v-img :src="ct3" contain height="100" />
-
-                                        <v-img :src="ct4" contain height="100" />
-
-                                        <v-img :src="ct5" contain height="100" />
-
-                                        <v-img :src="ct6" contain height="100" />
-
-                                        <v-img :src="ct7" contain height="100" />
-
-                                        <v-img :src="ct8" contain height="100" />
-
-                                        <v-img :src="ct9" contain height="100" />
-
-                                        <v-img :src="ct10" contain height="100" />
-
-                                    </div>
-                                </div>
+                                    </v-card-actions>
+                                </v-card>
 
                             </div>
-                        </v-col>
-                        <v-col cols="12" sm="12" md="4">
-                            <div class="container">
-                                <v-img :src="ct" contain height="700">
+                        </div>
+                    </div>
 
-                                </v-img>
-                            </div>
-                        </v-col>
-                        <v-col cols="12" sm="12" md="4">
-                            <div class="container"></div>
-                        </v-col>
-
-                    </v-row>
                 </div>
-
             </v-col>
-
+            <v-col cols="12" sm="12" md="12"> </v-col>
         </v-row>
         <div>
             <v-bottom-sheet v-model="drawer2" inset>
@@ -205,6 +194,54 @@
             {{ snackbarText2 }}
         </v-snackbar>
 
+        <v-dialog v-model="add_Cart" elevation="0" class="">
+            <v-row>
+                <v-col col="12" md="4">
+
+                </v-col>
+
+                <v-col col="12" md="4">
+                    <v-card elevation="0">
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn icon @click="add_Cart = false">
+                                <v-icon color="red">mdi-close</v-icon>
+                            </v-btn>
+                        </v-card-actions>
+                        <v-img :src="cartProduct.image_url" contain height="150"></v-img>
+                        <v-card-subtitle>
+                            <b style="font-size: 1.1rem; font-weight: 700; color: black;"> {{ cartProduct.name }}
+                            </b>
+                        </v-card-subtitle>
+                        <v-card-text>
+                            Now
+                            <br>
+                            <b style="font-size: 1.2rem; font-weight: 700; color: black;">Ksh {{ numeral(cartProduct.price * quantity).format("0,0")}}</b>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <div class="d-flex">
+                                <v-btn icon @click="quantity--">
+                                    <v-icon>mdi-minus</v-icon>
+                                </v-btn>
+                                p
+                                <v-btn icon @click="quantity++">
+                                    <v-icon>mdi-plus</v-icon>
+                                </v-btn>
+                            </div>
+                            <v-btn rounded color="black" style="color: aliceblue;" small @click="addToCart(cartProduct)">Add to cart <v-icon>mdi-cart</v-icon>
+                            </v-btn>
+
+                        </v-card-actions>
+                    </v-card>
+                </v-col>
+                <v-col col="12" md="4">
+
+                </v-col>
+
+            </v-row>
+
+        </v-dialog>
     </v-card>
 </div>
 </template>
@@ -214,17 +251,6 @@ import axios from "axios";
 import moment from "moment";
 import numeral from "numeral";
 import logo from "@/assets/logo.png";
-import ct from "@/assets/ct.jpg";
-import ct1 from "@/assets/cat/1.png";
-import ct2 from "@/assets/cat/2.png";
-import ct3 from "@/assets/cat/3.png";
-import ct4 from "@/assets/cat/4.png";
-import ct5 from "@/assets/cat/5.png";
-import ct6 from "@/assets/cat/6.png";
-import ct7 from "@/assets/cat/7.png";
-import ct8 from "@/assets/cat/8.png";
-import ct9 from "@/assets/cat/9.png";
-import ct10 from "@/assets/cat/10.png";
 
 import {
     uuid
@@ -237,17 +263,6 @@ export default {
     name: "accounts",
     data() {
         return {
-            ct,
-            ct1,
-            ct2,
-            ct3,
-            ct4,
-            ct5,
-            ct6,
-            ct7,
-            ct8,
-            ct9,
-            ct10,
             add_Cart: false,
             cartProduct: false,
             showBurger: false,
@@ -291,6 +306,161 @@ export default {
         };
     },
     methods: {
+        async scrollToSection1(val) {
+            this.$router.push({
+                path: `/${val}`,
+            });
+        },
+        onResize() {
+            this.windowSize = {
+                x: window.innerWidth,
+                y: window.innerHeight,
+            };
+            console.log("size", this.windowSize.x);
+            if (this.windowSize.x < 950) {
+                this.showBurger = true;
+                this.showHeroCard = true;
+            } else {
+                this.showBurger = false;
+            }
+            return this.windowSize;
+        },
+        logout() {
+            this.$fire.auth.signOut();
+            window.location.reload(true);
+        },
+        async addToCart(product) {
+            try {
+                const res = await axios.post("http://localhost:5000/api/cart/add", {
+                    uid: "grace",
+                    image_url: product.image_url,
+                    product_id: product.id,
+                    quantity: this.quantity,
+                    price: product.price,
+                });
+                this.Fetch_CartList();
+                this.add_Cart = false;
+                this.snackbar = true;
+                this.snackbarText = "✅ Item added to cart!";
+                console.log(res.data);
+            } catch (err) {
+                console.error(err);
+                alert("❌ Failed to add item to cart.");
+            }
+        },
+        async removeFromCart(item) {
+            try {
+                const res = await axios.post("http://localhost:5000/api/cart/remove/", {
+                    uid: "grace", // 👈 Data must go inside `data`
+                    product_id: item.product_id, // 👈 This will now appear in req.body                 
+                });
+
+                this.Fetch_CartList();
+                this.snackbar = true;
+                this.snackbarText = "✅ Item removed from cart!";
+                console.log(res.data);
+            } catch (err) {
+                console.error("❌ Remove failed:", err);
+                alert("❌ Failed to remove item from cart.");
+            }
+        },
+        async clearCart() {
+            try {
+                const res = await axios.post("http://localhost:5000/api/cart/clear/", {
+                    uid: "grace", // 👈 Data must go inside `data`
+                });
+                this.Fetch_CartList();
+                this.snackbar = true;
+                this.snackbarText = "✅Cart cleard!";
+                console.log(res.data);
+            } catch (err) {
+                console.error("❌ Remove failed:", err);
+                alert("❌ Failed to remove item from cart.");
+            }
+        },
+        async Fetch_Products() {
+            let that = this;
+            that.products.splice(that.products);
+            axios
+                .get("http://localhost:5000/api/products/getAll", {})
+                .then(function (response) {
+                    if (response.status == 200) {
+                        // that.snackbar = true;
+                        // that.snackbarText = response.data;
+                        that.products = response.data;
+                    } else if (response.status == 400) {
+                        that.snackbar2 = true;
+                        that.snackbarText2 = response.data;
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    that.snackbarText2 = error;
+                    that.snackbar2 = true;
+                });
+        },
+        async Search_Products(val) {
+            if(val ===""){
+                this.Fetch_Products();
+            }
+            let that = this;
+            that.products.splice(that.products);
+            axios
+                .get("http://localhost:5000/api/products/search/?query=" + val, {})
+                .then(function (response) {
+                    if (response.status == 200) {
+                        // that.snackbar = true;
+                        // that.snackbarText = response.data;
+                         if (that.products.length === 0) {
+                            that.snackbar = true;
+                            that.snackbarText = " Items not available";
+                        } else {
+
+                        }
+                        that.products = response.data;
+                    } else if (response.status == 400) {
+                        that.Fetch_Products();
+                        that.snackbar2 = true;
+                        that.snackbarText2 = response.data;
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    that.snackbarText2 = error;
+                    that.snackbar2 = true;
+                });
+        },
+        async search_with_categories(val) {
+            if(val ===""){
+                this.Fetch_Products();
+            }
+            let that = this;
+            that.products.splice(that.products);
+            axios
+                .get("http://localhost:5000/api/products/search/?query=" + val, {})
+                .then(function (response) {
+                    if (response.status == 200) {
+                        // that.snackbar = true;
+                        // that.snackbarText = response.data;
+                        that.products = response.data;
+                        if (that.products.length === 0) {
+                            that.snackbar = true;
+                            that.snackbarText = " Items not available";
+                        } else {
+
+                        }
+                    } else if (response.status == 400) {
+                        that.Fetch_Products();
+                        that.snackbar2 = true;
+                        that.snackbarText2 = response.data;
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    that.snackbarText2 = error;
+                    that.snackbar2 = true;
+                });
+        },
         async Fetch_CartList() {
             let that = this;
             that.cart_items.splice(0, that.cart_items.length);
@@ -314,30 +484,6 @@ export default {
                     that.snackbarText2 = error;
                     that.snackbar2 = true;
                 });
-        },
-
-        async scrollToSection1(val) {
-            this.$router.push({
-                path: `/${val}`,
-            });
-        },
-        onResize() {
-            this.windowSize = {
-                x: window.innerWidth,
-                y: window.innerHeight,
-            };
-            console.log("size", this.windowSize.x);
-            if (this.windowSize.x < 950) {
-                this.showBurger = true;
-                this.showHeroCard = true;
-            } else {
-                this.showBurger = false;
-            }
-            return this.windowSize;
-        },
-        logout() {
-            this.$fire.auth.signOut();
-            window.location.reload(true);
         },
 
         loginAnonymously1() {
@@ -373,7 +519,7 @@ export default {
 
     },
     mounted() {
-        // this.Fetch_Products();
+        this.Fetch_Products();
         this.Fetch_CartList();
         // window.addEventListener('scroll', this.handleScroll);
     },

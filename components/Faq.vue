@@ -68,6 +68,7 @@ export default {
     /* Background image */
     background-image: url('~/assets/p_about.png');
     background-attachment: fixed;
+    width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

@@ -1,10 +1,9 @@
 <template>
 <v-app>
     <v-row v-resize="onResize">
-        <!-- class="d-flex justify-center" -->
         <v-col cols="12" md="12">
             <div>
-                <v-app-bar light elevation="0" class="" color="white">
+                <v-app-bar light elevation="0" class="" color="white" fixed>
 
                     <v-app-bar-nav-icon v-show="showBurger"></v-app-bar-nav-icon>
 
@@ -16,9 +15,9 @@
                     <div v-show="!showBurger" id="nav_bar_links">
                         <a id="link" @click.prevent="scrollToSection('home')" style="margin: 8px;">Home</a>
                         <a id="link" @click.prevent="scrollToSection('about')" style="margin: 8px;">About</a>
-                        <a id="link" @click.prevent="scrollToSection('shop')" style="margin: 8px;">Shop</a>
+                        <a id="link" @click.prevent="scrollToSection1('shop')" style="margin: 8px;">Shop</a>
                         <a id="link" @click.prevent="scrollToSection('team')" style="margin: 8px;">Team</a>
-                        <a id="link" @click.prevent="scrollToSection('certifications')" style="margin: 8px;">Certifications</a>
+                        <a id="link" @click.prevent="scrollToSection1('certifications')" style="margin: 8px;">Certifications</a>
                         <a id="link" @click.prevent="scrollToSection('faq')" style="margin: 8px;">FAQ</a>
                         <a id="link" @click.prevent="scrollToSection('contact')" style="margin: 8px;">Contact</a>
                         <a id="link" @click.prevent="scrollToSection('terms')" style="margin: 8px;">terms</a>
@@ -36,18 +35,8 @@
                         </v-btn>
                     </div>
 
-                    <!-- <div class="d-flex" id="CountCart">
-                        <v-btn icon @click="drawer2 = !drawer2">
-                            <v-icon>mdi-cart</v-icon>
-                        </v-btn>
-
-                        <span id="cartCount">
-                            {{ totalItems }}
-                        </span>
-                    </div> -->
-
                 </v-app-bar>
-                <v-navigation-drawer absolute v-model="drawer2" right style="margin-top: 120px;" elevation="0">
+                <v-navigation-drawer v-model="drawer" absolute right style="margin-top: 120px;" elevation="0">
                     <template v-slot:prepend>
                         <v-list-item two-line>
 
@@ -64,7 +53,7 @@
 
                                     <v-btn rounded color="green" :to="`checkout/${uid}`">Check Out</v-btn>
                                     <p></p>
-                                    <v-btn text color="red">Clear cart</v-btn>
+                                    <v-btn text color="red" @click="clearCart">Clear cart</v-btn>
                                 </div>
                             </div>
                             <br>
@@ -100,9 +89,9 @@
             </section>
 
         </v-col>
-        <v-col cols="12" md="12">
+        <v-col cols="12" md="12" class="parallax_about">
             <section id="about" class="bg-gray-200  justify-center">
-                <div class="container my-0">
+                <div class="container my-0 ">
                     <div class="d-flex">
                         <div>
 
@@ -119,44 +108,41 @@
                         <v-spacer></v-spacer>
                         <div class="my-8">
                             <div class="d-flex">
-                                <a href="#" style="text-decoration: none; color: black; font-weight: 600; font-size: 1.2rem;">View All</a>
+                                <nuxt-link href="#" style="text-decoration: none; color: black; font-weight: 600; font-size: 1.2rem;" to="/shop">View All</nuxt-link>
                                 <v-icon color="black" large>mdi-chevron-right</v-icon>
                             </div>
 
                         </div>
                     </div>
 
-                    <div class="container">
+                    <div class="container" id="all_items2">
                         <div class="row">
 
                             <div v-for="(product, id) in products" :key="id" class="col-md-3">
 
-                                <v-card elevation="0">
+                                <v-card elevation="0" color="transparent">
                                     <v-img :src="product.image_url" contain height="150"></v-img>
                                     <v-card-subtitle>
                                         <b style="font-size: 1.1rem; font-weight: 700; color: black;"> {{ product.name }}
                                         </b>
                                     </v-card-subtitle>
-
+                                    <v-card-text>
+                                        Now
+                                        <br>
+                                        <b style="font-size: 1.2rem; font-weight: 700; color: black;">Ksh {{ product.price }}</b>
+                                    </v-card-text>
                                     <v-card-actions>
-
-                                        <v-btn color="black" style="color: aliceblue;" small @click="addToCart(product)">Add to cart <v-icon>mdi-cart</v-icon>
+                                        <v-btn rounded color="black" style="color: aliceblue;" small @click="add_Cart = true,quantity=1,cartProduct = product">Add to cart <v-icon>mdi-cart</v-icon>
                                         </v-btn>
-                                        <v-card-text>
-                                            Now
-                                            <br>
-                                            <b style="font-size: 1.2rem; font-weight: 700; color: black;">Ksh {{ product.price }}</b>
-                                        </v-card-text>
+                                        <v-spacer></v-spacer>
+
                                     </v-card-actions>
                                 </v-card>
 
                             </div>
                         </div>
                     </div>
-
-                </div>
-
-                <div class="features">
+ <div class="features">
                     <div class="container">
                         <div class="row">
                             <div class="feature ">
@@ -186,6 +172,9 @@
                         </div>
                     </div>
                 </div>
+                </div>
+
+               
             </section>
         </v-col>
         <v-col cols="12" md="12">
@@ -210,22 +199,129 @@
 
         </v-col>
         <v-col cols="12" class="justify-center">
-             <v-btn color="green" dark fab large @click="scrollToSection('home')" style="position: fixed; bottom: 30px; right: 30px;">
+            <v-btn color="green" dark fab large @click="scrollToSection('home')" style="position: fixed; bottom: 30px; right: 30px;">
                 <v-icon>mdi-whatsapp</v-icon>
             </v-btn>
-         </v-col>
+        </v-col>
         <v-col cols="12" class="justify-center">
             <v-btn v-show="backToTop" color="green" dark fab large @click="scrollToSection('home')" style="position: fixed; bottom: 30px; right: 30px;">
                 <v-icon>mdi-arrow-up</v-icon>
             </v-btn>
-           
-        </v-col>
-         
-        <!-- <v-dialog v-model="checkoutDialog" >
-        <checkout></checkout>
-    </v-dialog> -->
 
+        </v-col>
+        <div>
+            <v-bottom-sheet v-model="drawer2" inset >
+
+                <v-sheet class="text-sart" height="500px">
+
+                    <v-card elevation="0" class="container">
+                        <div class="d-flex">
+                            <v-card-title><b>Cart List</b></v-card-title>
+                            <v-spacer></v-spacer>
+                            <v-btn style="margin: 12px;" icon @click="drawer2 = false">
+                                <v-icon color="red">mdi-close</v-icon>
+                            </v-btn>
+                        </div>
+                        <v-divider></v-divider>
+                        <div class="container">
+                            <div class="">
+
+                                <v-list-item-content>
+                                    <v-list-item-subtitle>
+                                        <p>{{ totalItems }} items</p>
+                                    </v-list-item-subtitle>
+                                    <p>For</p>
+                                    <v-list-item-title>
+                                        <h3>Ksh/=<b> {{ numeral(total_price).format("0,0.0")  }}</b></h3>
+                                    </v-list-item-title>
+
+                                </v-list-item-content>
+
+                                <div>
+
+                                    <v-btn rounded color="green" :to="`checkout/${uid}`" style="color: white;">Check Out</v-btn>
+                                    <v-btn text color="red" @click="clearCart">Clear cart</v-btn>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row" id="all_items2">
+                            <div v-for="(item, id) in cart_items" :key="id" class="col-md-3">
+                                <v-list-item>
+                                    <v-list-item-icon>
+                                        <div class="d-flex">
+                                            <v-btn icon small @click="removeFromCart(item)">
+                                                <v-icon color="red">mdi-close-circle</v-icon>
+                                            </v-btn>
+                                            <v-img height="50" contain width="50" :src=" item.image_url"></v-img>
+                                        </div>
+                                    </v-list-item-icon>
+
+                                    <v-list-item-content>
+                                        <v-list-item-title>{{ item.name }}</v-list-item-title>
+                                        <br>
+                                        <v-list-item-subtitle>Qty: {{ item.quantity }} | Ksh {{ item.price }}</v-list-item-subtitle>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </div>
+                        </div>
+                    </v-card>
+
+                </v-sheet>
+            </v-bottom-sheet>
+        </div>
     </v-row>
+    <v-dialog v-model="add_Cart" elevation="0" class="">
+        <v-row>
+            <v-col col="12" md="4">
+
+            </v-col>
+
+            <v-col col="12" md="4">
+                <v-card elevation="0">
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn icon @click="add_Cart = false">
+                            <v-icon color="red">mdi-close</v-icon>
+                        </v-btn>
+                    </v-card-actions>
+                    <v-img :src="cartProduct.image_url" contain height="150"></v-img>
+                    <v-card-subtitle>
+                        <b style="font-size: 1.1rem; font-weight: 700; color: black;"> {{ cartProduct.name }}
+                        </b>
+                    </v-card-subtitle>
+                    <v-card-text>
+                        Now
+                        <br>
+                        <b style="font-size: 1.2rem; font-weight: 700; color: black;">Ksh {{ numeral(cartProduct.price * quantity).format("0,0")}}</b>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <div class="d-flex">
+                            <v-btn icon @click="quantity--">
+                                <v-icon>mdi-minus</v-icon>
+                            </v-btn>
+                            {{ quantity }}
+                            <v-btn icon @click="quantity++">
+                                <v-icon>mdi-plus</v-icon>
+                            </v-btn>
+                        </div>
+                        <v-btn rounded color="black" style="color: aliceblue;" small @click="addToCart(cartProduct)">Add to cart <v-icon>mdi-cart</v-icon>
+                        </v-btn>
+
+                    </v-card-actions>
+                </v-card>
+            </v-col>
+            <v-col col="12" md="4">
+
+            </v-col>
+
+        </v-row>
+
+    </v-dialog>
+    <v-snackbar color="success" :timeout="4000" v-model="snackbar" center>
+        {{ snackbarText }}
+    </v-snackbar>
 </v-app>
 </template>
 
@@ -250,6 +346,10 @@ export default {
     },
     data() {
         return {
+            add_Cart: false,
+            cartProduct: false,
+            snackbar: false,
+            snackbarText: "",
             numeral,
             image: null,
             user_id: 1,
@@ -258,8 +358,6 @@ export default {
             quantity: 1,
             price: null,
             activeSection: null,
-            p1: require("@/assets/product/p1.png"),
-
             showBurger: false,
             showHeroCard: false,
             heroHeight: 700,
@@ -273,26 +371,39 @@ export default {
             cart_items: [],
             total_items: 0,
             total_price: 0,
+            nameRules: [
+                (v) => !!v || "Name is required",
+                (v) => (v && v.length <= 20) || "Name must be less than 10 characters",
+            ],
+            email: "",
+            emailRules: [
+                (v) => !!v || "E-mail is required",
+                (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+            ],
             drawer2: false,
+            drawer: false,
             logo: require("@/assets/logo.png"),
             bg: require("@/assets/carousel/2.jpg"),
-            delivery:require("@/assets/delivery.svg"),
-                        price:require("@/assets/price.svg"),
-            support:require("@/assets/support.svg")
-
-
+            delivery: require("@/assets/delivery.svg"),
+            price: require("@/assets/price.svg"),
+            support: require("@/assets/support.svg")
         }
     },
     mounted() {
         this.Fetch_Products();
         this.Fetch_CartList();
-        window.addEventListener('scroll', this.handleScroll);
+        // window.addEventListener('scroll', this.handleScroll);
 
     },
     beforeDestroy() {
         window.removeEventListener('scroll', this.handleScroll)
     },
     methods: {
+        async scrollToSection1(val) {
+            this.$router.push({
+                path: `/${val}`,
+            });
+        },
         async addToCart(product) {
             try {
                 const res = await axios.post("http://localhost:5000/api/cart/add", {
@@ -303,7 +414,9 @@ export default {
                     price: product.price,
                 });
                 this.Fetch_CartList();
-                alert("✅ Item added to cart!");
+                this.add_Cart = false;
+                this.snackbar = true;
+                this.snackbarText = "✅ Item added to cart!";
                 console.log(res.data);
             } catch (err) {
                 console.error(err);
@@ -318,8 +431,22 @@ export default {
                 });
 
                 this.Fetch_CartList();
-                alert("✅ Item removed from cart!");
+                this.snackbar = true;
+                this.snackbarText = "✅ Item removed from cart!";
                 console.log(res.data);
+            } catch (err) {
+                console.error("❌ Remove failed:", err);
+                alert("❌ Failed to remove item from cart.");
+            }
+        },
+        async clearCart() {
+            try {
+                const res = await axios.post("http://localhost:5000/api/cart/clear/", {
+                    uid: "grace", // 👈 Data must go inside `data`
+                });
+                this.Fetch_CartList();
+                this.snackbar = true;
+                this.snackbarText = "✅ Cart cleard!";
             } catch (err) {
                 console.error("❌ Remove failed:", err);
                 alert("❌ Failed to remove item from cart.");
@@ -337,14 +464,12 @@ export default {
                         that.products = response.data;
                         console.log("products", that.products);
                     } else if (response.status == 400) {
-                        that.snackbar2 = true;
-                        that.snackbarText2 = response.data;
+
                     }
                 })
                 .catch(function (error) {
                     console.log(error);
-                    that.snackbarText2 = error;
-                    that.snackbar2 = true;
+
                 });
         },
         async Fetch_CartList() {
@@ -386,21 +511,7 @@ export default {
             }
             return this.windowSize;
         },
-        handleScroll() {
-            const sections = document.querySelectorAll('section')
-            const scrollPos = window.scrollY + 150
-            sections.forEach(section => {
-                const link = document.querySelector(`nav a[href="#${section.id}"]`)
-                if (
-                    section.offsetTop <= scrollPos &&
-                    section.offsetTop + section.offsetHeight > scrollPos
-                ) {
-                    link.classList.add('active')
-                } else {
-                    link.classList.remove('active')
-                }
-            })
-        },
+       
         scrollToSection(id) {
             const target = document.getElementById(id)
             if (target.id != 'home') {
@@ -410,7 +521,6 @@ export default {
             }
 
             if (!target) return
-
             const start = window.scrollY
             const end = target.offsetTop
             const distance = end - start
@@ -428,7 +538,6 @@ export default {
                 window.scrollTo(0, start + distance * easeInOutQuad(progress))
                 if (timeElapsed < duration) requestAnimationFrame(animation)
             }
-
             requestAnimationFrame(animation)
         }
     }
@@ -436,6 +545,85 @@ export default {
 </script>
 
 <style scoped>
+.parallax_about {
+    /* Background image */
+    background-image: url('~/assets/p_about.png');
+    background-attachment: fixed;
+    background-position: center;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#all_items2 {
+  --scrollbarBG: #00000000;
+  --thumbBG: #2f2c2c00;
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+  overflow-x: auto;
+  width: 100%;
+  align-items: start;
+  bottom: 0;
+  padding: 3px;
+  height: 700px;
+}
+
+#all_items2::-webkit-scrollbar {
+  width: 8px;
+}
+
+#all_items2::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+
+#all_items2::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+  border-radius: 8px;
+  border: 3px solid var(--scrollbarBG);
+}
+
+ /* The horizontal scroller */
+  .scroller {
+    display: flex;
+    gap: var(--gap);
+    overflow-x: auto;
+    scroll-behavior: smooth;               /* native smooth scroll */
+    -webkit-overflow-scrolling: touch;     /* momentum on iOS */
+    scroll-snap-type: x mandatory;         /* snap to items */
+    padding: 1rem;
+    border-radius: .75rem;
+    background: linear-gradient(180deg, #fff, #fbfbff);
+    box-shadow: 0 6px 18px rgba(20,20,40,0.06);
+    cursor: grab;                          /* changes while dragging via JS */
+    user-select: none;
+  }
+
+  /* Individual items */
+  .item {
+    flex: 0 0 var(--item-w);               /* fixed width items */
+    height: 180px;
+    border-radius: .6rem;
+    background: linear-gradient(135deg,#e8f1ff,#fef3e6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1rem;
+    scroll-snap-align: start;              /* snap alignment */
+    box-shadow: 0 6px 14px rgba(18,18,40,0.06);
+  }
+
+  /* Hide default scrollbars (graceful fallback) */
+  .scroller {
+    scrollbar-width: thin;                 /* firefox */
+    scrollbar-color: rgba(0,0,0,0.18) transparent;
+  }
+  .scroller::-webkit-scrollbar{ height: 9px; }
+  .scroller::-webkit-scrollbar-track{ background: transparent; }
+  .scroller::-webkit-scrollbar-thumb{
+    background: rgba(0,0,0,0.12);
+    border-radius: 999px;
+  }
+
 .cart-container {
     position: relative;
     display: flex;
@@ -605,8 +793,6 @@ export default {
     backdrop-filter: blur(14px);
 }
 
-
-
 #nav_bar_links {
     color: black;
     font-weight: 500;
@@ -634,7 +820,7 @@ export default {
     align-items: flex-start;
     gap: 2rem;
     padding: 3rem 2rem;
-    background: #fff;
+    background: #ffffff00;
     flex-wrap: wrap;
     /* allow wrapping on small screens */
 }

@@ -208,6 +208,8 @@
 </template>
 
 <script>
+import p1 from "@/assets/product/p1.png";
+
 export default {
     name: 'EmptyLayout',
     layout: 'empty',
@@ -219,10 +221,7 @@ export default {
     },
     data() {
         return {
-            p1: require("@/assets/product/p1.png"),
-            delivery: require("@/assets/delivery.svg"),
-            price: require("@/assets/price.svg"),
-            support: require("@/assets/support.svg"),
+            p1,
             pageNotFound: '404 Not Found',
             otherError: 'An error occurred'
         }
@@ -360,6 +359,7 @@ export default {
     /* Background image */
     background-image: url('~/assets/about.jpg');
     background-attachment: fixed;
+        width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -382,6 +382,7 @@ export default {
     background-image: url('~/assets/more.png');
     background-attachment: fixed;
     background-position: center;
+        width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -391,6 +392,7 @@ export default {
     background-image: url('~/assets/p_about.png');
     background-attachment: fixed;
     background-position: center;
+    width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
 }

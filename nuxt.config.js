@@ -5,7 +5,7 @@ export default {
   ssr: false,
    server: {
     host: '127.0.0.1',
-    port: 4000
+    port: 3000
   },
 
   // Target: https://go.nuxtjs.dev/config-target
@@ -60,8 +60,6 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
     "@nuxtjs/google-fonts",
-    '@nuxtjs/moment',
-    '@nuxtjs/dayjs',
 
   ],
   moment: {

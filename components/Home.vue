@@ -1,153 +1,161 @@
 <!-- Please remove this file from your project -->
 <template>
-    <div>
-                    <v-img with="100%" :src="bg" height="700">
+<div>
+    <v-img with="100%" :src="bg" height="700">
 
-                        <div style="background: linear-gradient(to right, rgba(140, 198, 63, 0.8),rgba(139, 198, 63, 0.685), rgba(255, 255, 255, 0.1));
+        <div style="background: linear-gradient(to right, rgba(140, 198, 63, 0.8),rgba(139, 198, 63, 0.685), rgba(255, 255, 255, 0.1));
                                     padding: 30px 50px;
                                     display: flex;
                                     height: 100vh;
                                     background-size: cover;
                                     background-position: center;
                                     background-repeat: no-repeat;">
-                            <v-row>
+            <v-row>
 
-                                <v-col cols="12" md="8" class="fade-in-right" >
-                                            <div class=" container">
+                <v-col cols="12" md="8" class="fade-in-right">
+                    <div class=" container">
 
-                                    <v-card color="transparent" v-show="!showBurger" height="200" elevation="0">
+                        <v-card color="transparent" v-show="!showBurger" height="200" elevation="0">
 
-                                    </v-card>
+                        </v-card>
 
-                                    <div class="">
+                        <div class="">
 
-                                        <h1 class="" style="font-size: 1.9rem; font-weight: 900;">Your Wellness. <br> Our
-                                            Mission</h1>
-                                        <p class=" mb-4" style="font-size: 1.2rem;">SwissLife Africa help you find solutions for your
-                                            health <br>
+                            <h1 class="" style="font-size: 1.9rem; font-weight: 900;">Your Wellness. <br> Our
+                                Mission</h1>
+                            <p class=" mb-4" style="font-size: 1.2rem;">SwissLife Africa help you find solutions for your
+                                health <br>
 
-                                            Your trusted partner in health and wellness.<br>
-                                            From prescriptions to expert advice, we’ve got you <br>
-                                            covered. Helping you and your family stay healthy,
-                                            every day.</p>
-                                        <v-btn rounded style="color: black;" color="white" large @click="scrollToSection('about')">Shop Now <v-icon right dark>
-                                                mdi-cart
-                                            </v-icon>
-                                        </v-btn>
-                                    </div>
-
+                                Your trusted partner in health and wellness.<br>
+                                From prescriptions to expert advice, we’ve got you <br>
+                                covered. Helping you and your family stay healthy,
+                                every day.</p>
+                            <v-btn rounded style="color: black;" color="white" large @click="scrollToSection('about')">Shop Now <v-icon right dark>
+                                    mdi-cart
+                                </v-icon>
+                            </v-btn>
                         </div>
-    </v-col>
-    <v-col cols="12" md="4" v-show="!showBurger">
-        <div class="">
-
-            <v-card color="transparent" height="300" elevation="0" min-width="400">
-                <v-card class="box">
-
-                    <div>
-
-                        <v-card-actions>
-                            <v-card-subtitle>
-                                <b style="font-size: 1.5rem; font-weight: 700; color: black;">Organic
-                                    <br> Kelp</b>
-                                <br>
-                                <p>Oragnic</p>
-                            </v-card-subtitle>
-
-                            <v-chip color="green" text-color="white" small>20% OFF</v-chip>
-                            <v-chip color="green" text-color="white" small>20% OFF</v-chip>
-                        </v-card-actions>
-                        <v-img :src="p1" contain height="270"></v-img>
 
                     </div>
-                </v-card>
-                <v-card>
-                    <v-card-subtitle>
-                        NOw <br>
-                        <b style="font-size: 1.7rem; font-weight: 700; color: black;">Ksh 1,400</b>
-                    </v-card-subtitle>
+                </v-col>
+                <v-col cols="12" md="4" v-show="!showBurger">
+                    <div class="">
 
-                </v-card>
+                        <v-card color="transparent" height="300" elevation="0" min-width="400">
+                            <br>
+                            <br>
+                            <br>
+                            </br>
+                            <v-card class="box">
 
-            </v-card>
+                                <div>
 
-        </div>
-
-    </v-col>
-    <v-col cols="12" md="4" v-show="showBurger">
-        <div class="">
-
-            <v-card color="transparent" height="300" elevation="0" min-width="300">
-                <div class="d-flex">
-                    <v-card class="box">
-
-                        <div>
-
-                            <v-card-actions>
-                                <v-card-subtitle>
-                                    <div class="d-flex">
-                                        <v-img :src="p1" contain height="60" width="60"></v-img>
-
-                                        <div>
+                                    <v-card-actions>
+                                        <v-card-subtitle>
                                             <b style="font-size: 1.5rem; font-weight: 700; color: black;">Organic
                                                 <br> Kelp</b>
-
                                             <br>
                                             <p>Oragnic</p>
-                                        </div>
+                                        </v-card-subtitle>
 
-                                    </div>
+                                        <v-chip color="green" text-color="white" small>20% OFF</v-chip>
+                                        <v-chip color="green" text-color="white" small>20% OFF</v-chip>
+                                    </v-card-actions>
+                                    <v-img :src="p1" contain height="270"></v-img>
 
+                                </div>
+                            </v-card>
+                            <v-card>
+                                <v-card-subtitle>
+                                    NOw <br>
+                                    <b style="font-size: 1.7rem; font-weight: 700; color: black;">Ksh 1,400</b>
                                 </v-card-subtitle>
 
-                            </v-card-actions>
+                            </v-card>
 
-                        </div>
-                    </v-card>
-                    <v-card>
-                        <v-card-subtitle>
-                            NOw <br>
-                            <b style="font-size: 1.5rem; font-weight: 700; color: black;">Ksh 1,400</b>
-                            <br>
-                            <v-chip-group>
-                                <v-chip color="green" text-color="white" small>20% OFF</v-chip>
-                                <v-chip color="green" text-color="white" small>20% OFF</v-chip>
-                            </v-chip-group>
-                        </v-card-subtitle>
+                        </v-card>
 
-                    </v-card>
-                </div>
+                    </div>
 
-            </v-card>
+                </v-col>
+                <v-col cols="12" md="4" v-show="showBurger">
+                    <div class="">
 
+                        <v-card color="transparent" height="300" elevation="0" min-width="300">
+                            <div class="d-flex">
+                                <v-card class="box">
+
+                                    <div>
+
+                                        <v-card-actions>
+                                            <v-card-subtitle>
+                                                <div class="d-flex">
+                                                    <v-img :src="p1" contain height="60" width="60"></v-img>
+
+                                                    <div>
+                                                        <b style="font-size: 1.5rem; font-weight: 700; color: black;">Organic
+                                                            <br> Kelp</b>
+
+                                                        <br>
+                                                        <p>Oragnic</p>
+                                                    </div>
+
+                                                </div>
+
+                                            </v-card-subtitle>
+
+                                        </v-card-actions>
+
+                                    </div>
+                                </v-card>
+                                <v-card>
+                                    <v-card-subtitle>
+                                        NOw <br>
+                                        <b style="font-size: 1.5rem; font-weight: 700; color: black;">Ksh 1,400</b>
+                                        <br>
+                                        <v-chip-group>
+                                            <v-chip color="green" text-color="white" small>20% OFF</v-chip>
+                                            <v-chip color="green" text-color="white" small>20% OFF</v-chip>
+                                        </v-chip-group>
+                                    </v-card-subtitle>
+
+                                </v-card>
+                            </div>
+
+                        </v-card>
+
+                    </div>
+
+                </v-col>
+            </v-row>
         </div>
-
-    </v-col>
-</v-row>
-</div>
-</v-img>
+    </v-img>
 </div>
 </template>
 
 <script>
+import p1 from "@/assets/product/p1.png";
+import bg from "@/assets/carousel/2.jpg";
+
 export default {
-  name: 'NuxtTutorial',
-  props: {
+    name: 'NuxtTutorial',
+    props: {
         showBurger: {
             type: Boolean,
             required: true,
         },
     },
-  data () {
-    return {
-      p1: require("@/assets/product/p1.png"),
-      bg: require("@/assets/carousel/2.jpg"),
-      pageNotFound: '404 Not Found',
-      otherError: 'An error occurred'
-    }
-  },
+    data() {
+        return {
+            p1,
+            bg,
+            pageNotFound: '404 Not Found',
+            otherError: 'An error occurred'
+        }
+    },
 }
 </script>
+
 <style scoped>
 .box {
     background-color: rgb(255 255 255 / 30%);

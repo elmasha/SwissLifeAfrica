@@ -81,7 +81,7 @@ export default {
       bulk_price:"", 
       moq:"", 
       stock:"", 
-      image_url:"https://image2url.com/images/1762629613094-8ebcf5d7-1455-4fcb-a823-1c7e62278923.png",
+      // image_url:"https://image2url.com/images/1762629613094-8ebcf5d7-1455-4fcb-a823-1c7e62278923.png",
     };
   },
   methods: {
