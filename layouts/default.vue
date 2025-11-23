@@ -113,6 +113,10 @@ export default {
 </script>
 
 <style>
+* .scrollable-element::-webkit-scrollbar {
+  display: none;
+}
+
 .parallax_footer {
     /* Background image */
     background-image: url('~/assets/p_about.png');

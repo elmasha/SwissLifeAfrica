@@ -1,9 +1,9 @@
 <template>
-<div>
+<div class="" style="padding-top: 80px;">
     <div class="parallax">
-        <div class="container">
+        <div class="container" style="padding: 40px;">
 
-            <v-card class="box1" style="padding: 40px;">
+            <v-card class="box1" style="padding: 0px;">
 
                 <v-row class="container">
                     <v-col cols="12" md="6" class="">
@@ -19,7 +19,7 @@
 
                         </div>
                     </v-col>
-                    <v-col cols="12" md="2" class="">
+                    <v-col cols="12" md="2" class="container">
                         <div class=" p-8">
                             <v-card-title>
                                 <h4 style="font-weight: 800;">Who We Are
@@ -39,7 +39,7 @@
 
                         </div>
                     </v-col>
-                    <v-col cols="12" md="2" class="">
+                    <v-col cols="12" md="2" class="container">
                         <div class=" p-8">
                             <v-card-title>
                                 <h4 style="font-weight: 800;">What We Do
@@ -59,7 +59,7 @@
 
                         </div>
                     </v-col>
-                    <v-col cols="12" md="2" class="">
+                    <v-col cols="12" md="2" class="container">
                         <div class=" p-8">
                             <v-card-title>
                                 <h4 style="font-weight: 800;">
@@ -359,7 +359,7 @@ export default {
     /* Background image */
     background-image: url('~/assets/about.jpg');
     background-attachment: fixed;
-        width: 100%;
+    width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

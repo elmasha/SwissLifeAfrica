@@ -1,7 +1,7 @@
 <template>
-  <div class="" >
+  <div class="container" >
         <div class=" parallax_about" >
-            <v-row>
+            <v-row style="padding-top: 8rem;"  class="container">
                 <v-col cols="12" md="2"></v-col>
                 <v-col cols="12" md="5">
                     <div class="container">

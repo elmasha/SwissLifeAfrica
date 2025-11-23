@@ -2,9 +2,9 @@
 <div class="parallax_about">
     <div class="container ">
 
-        <h1 class="container">Our Dedicated team</h1>
+        <h1 class="container" style="padding-top: 80px;">Our Dedicated team</h1>
 
-        <div class="">
+        <div class="container">
             <v-row class="text-center">
                 <v-col cols="6" md="4" class="">
                     <v-card elevation="0" color="transparent">
@@ -162,7 +162,7 @@ export default {
     /* Background image */
     background-image: url('~/assets/p_about.png');
     background-attachment: fixed;
-        width: 100%;
+    width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

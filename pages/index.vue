@@ -5,7 +5,28 @@
             <div>
                 <v-app-bar light elevation="0" class="" color="white" fixed>
 
-                    <v-app-bar-nav-icon v-show="showBurger"></v-app-bar-nav-icon>
+                    <v-menu offset-y>
+                        <template v-slot:activator="{ on, attrs }">
+
+                            <v-app-bar-nav-icon v-show="showBurger" light v-bind="attrs" v-on="on" color="black"></v-app-bar-nav-icon>
+                        </template>
+                        <v-list>
+                            <!-- <v-list-item v-for="(item, index) in items" :key="item.title">
+                                <v-list-item-action @click="checkNav(item.title)">{{ item.title }}</v-list-item-action>
+                                <v-list-item-title></v-list-item-title>
+                            </v-list-item> -->
+
+                            <v-list-item> <a id="link" @click.prevent="scrollToSection('home')" style="margin: 8px;">Home</a></v-list-item>
+                            <v-list-item><a id="link" @click.prevent="scrollToSection('about')" style="margin: 8px;">About</a></v-list-item>
+                            <v-list-item><a id="link" @click.prevent="scrollToSection1('shop')" style="margin: 8px;">Shop</a></v-list-item>
+                            <v-list-item> <a id="link" @click.prevent="scrollToSection('team')" style="margin: 8px;">Team</a></v-list-item>
+                            <v-list-item> <a id="link" @click.prevent="scrollToSection1('certifications')" style="margin: 8px;">Certifications</a></v-list-item>
+                            <v-list-item> <a id="link" @click.prevent="scrollToSection('faq')" style="margin: 8px;">FAQ</a></v-list-item>
+                            <v-list-item> <a id="link" @click.prevent="scrollToSection('contact')" style="margin: 8px;">Contact</a></v-list-item>
+                            <v-list-item><a id="link" @click.prevent="scrollToSection('terms')" style="margin: 8px;">terms</a></v-list-item>
+
+                        </v-list>
+                    </v-menu>
 
                     <v-toolbar-title>
                         <v-img :src="logo" contain width="120" height="30"></v-img>
@@ -83,121 +104,125 @@
 
             </div>
         </v-col>
-        <v-col cols="12" md="12">
-            <section id="home" class="bg-gray-100 ">
-                <home :showBurger="showBurger"></home>
-            </section>
+        <v-row>
+            <v-col cols="12" md="12"></v-col>
+            <v-col cols="12" md="12"></v-col>
+            <v-col cols="12" md="12">
+                <section id="home" class="bg-gray-100 ">
+                    <home :showBurger="showBurger"></home>
+                </section>
 
-        </v-col>
-        <v-col cols="12" md="12" class="parallax_about">
-            <section id="about" class="bg-gray-200  justify-center">
-                <div class="container my-0 ">
-                    <div class="d-flex">
-                        <div>
+            </v-col>
+            <v-col cols="12" md="12" class="parallax_about">
+                <section id="shop" class=" ">
+                    <div class="container my-0 ">
+                        <div class="d-flex">
+                            <div>
 
-                            <h1>Best Sellers</h1>
+                                <h1>Best Sellers</h1>
 
-                            <label for="">Best selling categories</label>
-                            <v-chip-group column>
-                                <v-chip color="black" text-color="white" small>20% OFF</v-chip>
-                                <v-chip color="black" outlined text-color="black" small>20% OFF</v-chip>
-                                <v-chip color="black" outlined text-color="black" small>20% OFF</v-chip>
-                                <v-chip color="black" outlined text-color="black" small>20% OFF</v-chip>
-                            </v-chip-group>
-                        </div>
-                        <v-spacer></v-spacer>
-                        <div class="my-8">
-                            <div class="d-flex">
-                                <nuxt-link href="#" style="text-decoration: none; color: black; font-weight: 600; font-size: 1.2rem;" to="/shop">View All</nuxt-link>
-                                <v-icon color="black" large>mdi-chevron-right</v-icon>
+                                <label for="">Best selling categories</label>
+                                <v-chip-group column>
+                                    <v-chip color="black" text-color="white" small>20% OFF</v-chip>
+                                    <v-chip color="black" outlined text-color="black" small>20% OFF</v-chip>
+                                    <v-chip color="black" outlined text-color="black" small>20% OFF</v-chip>
+                                    <v-chip color="black" outlined text-color="black" small>20% OFF</v-chip>
+                                </v-chip-group>
                             </div>
+                            <v-spacer></v-spacer>
+                            <div class="my-8">
+                                <div class="d-flex">
+                                    <nuxt-link href="#" style="text-decoration: none; color: black; font-weight: 600; font-size: 1.2rem;" to="/shop">View All</nuxt-link>
+                                    <v-icon color="black" large>mdi-chevron-right</v-icon>
+                                </div>
 
+                            </div>
+                        </div>
+
+                        <div class="container" id="all_items2">
+                            <div class="row">
+
+                                <div v-for="(product, id) in products" :key="id" class="col-md-3">
+
+                                    <v-card elevation="0" color="transparent">
+                                        <v-img :src="product.image_url" contain height="150"></v-img>
+                                        <v-card-subtitle>
+                                            <b style="font-size: 1.1rem; font-weight: 700; color: black;"> {{ product.name }}
+                                            </b>
+                                        </v-card-subtitle>
+                                        <v-card-text>
+                                            Now
+                                            <br>
+                                            <b style="font-size: 1.2rem; font-weight: 700; color: black;">Ksh {{ product.price }}</b>
+                                        </v-card-text>
+                                        <v-card-actions>
+                                            <v-btn rounded color="black" style="color: aliceblue;" small @click="add_Cart = true,quantity=1,cartProduct = product">Add to cart <v-icon>mdi-cart</v-icon>
+                                            </v-btn>
+                                            <v-spacer></v-spacer>
+
+                                        </v-card-actions>
+                                    </v-card>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="features">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="feature ">
+                                        <div class="icon-bg">
+                                            <v-img :src="delivery" alt="delivery icon" />
+                                        </div>
+
+                                        <h3>Fast <br />Delivery</h3>
+                                        <p>Get your supplements and pharmacy essentials delivered to your doorstep</p>
+                                    </div>
+
+                                    <div class="feature">
+                                        <div class="icon-bg">
+                                            <v-img :src="support" alt="pharmacy support icon" />
+                                        </div>
+                                        <h3>Pharmacy <br />Support</h3>
+                                        <p>Our pharmacy team offers expert advice and support for your health.</p>
+                                    </div>
+
+                                    <div class="feature">
+                                        <div class="icon-bg">
+                                            <v-img :src="price" alt="affordable prices icon" />
+                                        </div>
+                                        <h3>Affordable <br />Prices</h3>
+                                        <p>Enjoy premium, pharmacist-formulated supplements at pocket-friendly prices</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="container" id="all_items2">
-                        <div class="row">
+                </section>
+            </v-col>
+            <v-col cols="12" md="12">
+                <section id="about" class="  ">
+                    <about></about>
+                </section>
+            </v-col>
+            <v-col cols="12" md="12">
+                <section id="team" class=" ">
+                    <team></team>
+                </section>
+            </v-col>
+            <v-col cols="12" md="12">
+                <section id="faq" class="  ">
+                    <faq></faq>
+                </section>
+            </v-col>
+            <v-col cols="12" md="12">
+                <section id="contact" class=" parallax_about">
+                    <contact></contact>
+                </section>
 
-                            <div v-for="(product, id) in products" :key="id" class="col-md-3">
+            </v-col>
+        </v-row>
 
-                                <v-card elevation="0" color="transparent">
-                                    <v-img :src="product.image_url" contain height="150"></v-img>
-                                    <v-card-subtitle>
-                                        <b style="font-size: 1.1rem; font-weight: 700; color: black;"> {{ product.name }}
-                                        </b>
-                                    </v-card-subtitle>
-                                    <v-card-text>
-                                        Now
-                                        <br>
-                                        <b style="font-size: 1.2rem; font-weight: 700; color: black;">Ksh {{ product.price }}</b>
-                                    </v-card-text>
-                                    <v-card-actions>
-                                        <v-btn rounded color="black" style="color: aliceblue;" small @click="add_Cart = true,quantity=1,cartProduct = product">Add to cart <v-icon>mdi-cart</v-icon>
-                                        </v-btn>
-                                        <v-spacer></v-spacer>
-
-                                    </v-card-actions>
-                                </v-card>
-
-                            </div>
-                        </div>
-                    </div>
- <div class="features">
-                    <div class="container">
-                        <div class="row">
-                            <div class="feature ">
-                                <div class="icon-bg">
-                                    <v-img :src="delivery" alt="delivery icon" />
-                                </div>
-
-                                <h3>Fast <br />Delivery</h3>
-                                <p>Get your supplements and pharmacy essentials delivered to your doorstep</p>
-                            </div>
-
-                            <div class="feature">
-                                <div class="icon-bg">
-                                    <v-img :src="support" alt="pharmacy support icon" />
-                                </div>
-                                <h3>Pharmacy <br />Support</h3>
-                                <p>Our pharmacy team offers expert advice and support for your health.</p>
-                            </div>
-
-                            <div class="feature">
-                                <div class="icon-bg">
-                                    <v-img :src="price" alt="affordable prices icon" />
-                                </div>
-                                <h3>Affordable <br />Prices</h3>
-                                <p>Enjoy premium, pharmacist-formulated supplements at pocket-friendly prices</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-
-               
-            </section>
-        </v-col>
-        <v-col cols="12" md="12">
-            <section id="shop" class="bg-gray-300  justify-center">
-                <about></about>
-            </section>
-        </v-col>
-        <v-col cols="12" md="12">
-            <section id="team" class="bg-gray-300  justify-center">
-                <team></team>
-            </section>
-        </v-col>
-        <v-col cols="12" md="12">
-            <section id="faq" class="bg-gray-300  justify-center">
-                <faq></faq>
-            </section>
-        </v-col>
-        <v-col cols="12" md="12">
-            <section id="contact" class="bg-gray-400  justify-center parallax_about">
-                <contact></contact>
-            </section>
-
-        </v-col>
         <v-col cols="12" class="justify-center">
             <v-btn color="green" dark fab large @click="scrollToSection('home')" style="position: fixed; bottom: 30px; right: 30px;">
                 <v-icon>mdi-whatsapp</v-icon>
@@ -210,7 +235,7 @@
 
         </v-col>
         <div>
-            <v-bottom-sheet v-model="drawer2" inset >
+            <v-bottom-sheet v-model="drawer2" inset>
 
                 <v-sheet class="text-sart" height="500px">
 
@@ -271,52 +296,45 @@
             </v-bottom-sheet>
         </div>
     </v-row>
-    <v-dialog v-model="add_Cart" elevation="0" class="">
-        <v-row>
-            <v-col col="12" md="4">
+    <v-dialog v-model="add_Cart" elevation="0" class="text-center" :scrollable="false" max-width="400">
 
-            </v-col>
+        <v-card>
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn icon @click="add_Cart = false">
+                    <v-icon color="red">mdi-close</v-icon>
+                </v-btn>
+            </v-card-actions>
+            <v-img :src="cartProduct.image_url" contain height="150"></v-img>
+            <v-card-subtitle style=" margin-top: 20px;">
+                <b style="font-size: 1.3rem; font-weight: 700; color: black;"> {{ cartProduct.name }}
+                </b>
+            </v-card-subtitle>
+            <v-card-text>
+                Now
+                <br>
+                <b style="font-size: 1.2rem; font-weight: 700; color: black;">Ksh {{ numeral(cartProduct.price * quantity).format("0,0")}}</b>
+            </v-card-text>
+            <v-card-actions>
 
-            <v-col col="12" md="4">
-                <v-card elevation="0">
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn icon @click="add_Cart = false">
-                            <v-icon color="red">mdi-close</v-icon>
+                <div>
+                    <p>Quantity</p>
+                    <div class="d-flex">
+                        <v-btn icon @click="quantity--">
+                            <v-icon>mdi-minus</v-icon>
                         </v-btn>
-                    </v-card-actions>
-                    <v-img :src="cartProduct.image_url" contain height="150"></v-img>
-                    <v-card-subtitle>
-                        <b style="font-size: 1.1rem; font-weight: 700; color: black;"> {{ cartProduct.name }}
-                        </b>
-                    </v-card-subtitle>
-                    <v-card-text>
-                        Now
-                        <br>
-                        <b style="font-size: 1.2rem; font-weight: 700; color: black;">Ksh {{ numeral(cartProduct.price * quantity).format("0,0")}}</b>
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <div class="d-flex">
-                            <v-btn icon @click="quantity--">
-                                <v-icon>mdi-minus</v-icon>
-                            </v-btn>
-                            {{ quantity }}
-                            <v-btn icon @click="quantity++">
-                                <v-icon>mdi-plus</v-icon>
-                            </v-btn>
-                        </div>
-                        <v-btn rounded color="black" style="color: aliceblue;" small @click="addToCart(cartProduct)">Add to cart <v-icon>mdi-cart</v-icon>
+                        <p><b style="margin-top: 8px;  font-size: 1.3rem; margin-left: 6px;margin-right: 6px;"> {{ quantity }}</b></p>
+                        <v-btn icon @click="quantity++">
+                            <v-icon>mdi-plus</v-icon>
                         </v-btn>
+                    </div>
+                </div>
+                <v-spacer></v-spacer>
+                <v-btn rounded color="black" style="color: aliceblue;" @click="addToCart(cartProduct)">Add Item <v-icon>mdi-cart</v-icon>
+                </v-btn>
 
-                    </v-card-actions>
-                </v-card>
-            </v-col>
-            <v-col col="12" md="4">
-
-            </v-col>
-
-        </v-row>
+            </v-card-actions>
+        </v-card>
 
     </v-dialog>
     <v-snackbar color="success" :timeout="4000" v-model="snackbar" center>
@@ -346,6 +364,32 @@ export default {
     },
     data() {
         return {
+            itemTitle: '',
+            items: [{
+                    title: 'Home'
+                },
+                {
+                    title: 'About'
+                },
+                {
+                    title: 'Shop'
+                },
+                {
+                    title: 'Team'
+                },
+                {
+                    title: 'Certifications'
+                },
+                {
+                    title: 'Faq'
+                },
+                {
+                    title: 'Contact'
+                },
+                {
+                    title: 'Terms'
+                },
+            ],
             add_Cart: false,
             cartProduct: false,
             snackbar: false,
@@ -399,6 +443,19 @@ export default {
         window.removeEventListener('scroll', this.handleScroll)
     },
     methods: {
+        async checkNav(val) {
+            alert("❌", this.itemTitle);
+            if (val === 'shop') {
+                this.scrollToSection1(val)
+            } else if (val === 'certifications') {
+                this.scrollToSection1(val)
+
+            } else {
+                this.scrollToSection(val)
+
+            }
+
+        },
         async scrollToSection1(val) {
             this.$router.push({
                 path: `/${val}`,
@@ -511,7 +568,7 @@ export default {
             }
             return this.windowSize;
         },
-       
+
         scrollToSection(id) {
             const target = document.getElementById(id)
             if (target.id != 'home') {
@@ -554,75 +611,90 @@ export default {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 #all_items2 {
-  --scrollbarBG: #00000000;
-  --thumbBG: #2f2c2c00;
-  scrollbar-width: thin;
-  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
-  overflow-x: auto;
-  width: 100%;
-  align-items: start;
-  bottom: 0;
-  padding: 3px;
-  height: 700px;
+    --scrollbarBG: #00000000;
+    --thumbBG: #2f2c2c00;
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+    overflow-x: auto;
+    width: 100%;
+    align-items: start;
+    bottom: 0;
+    padding: 3px;
+    height: 700px;
 }
 
 #all_items2::-webkit-scrollbar {
-  width: 8px;
+    width: 8px;
 }
 
 #all_items2::-webkit-scrollbar-track {
-  background: var(--scrollbarBG);
+    background: var(--scrollbarBG);
 }
 
 #all_items2::-webkit-scrollbar-thumb {
-  background-color: var(--thumbBG);
-  border-radius: 8px;
-  border: 3px solid var(--scrollbarBG);
+    background-color: var(--thumbBG);
+    border-radius: 8px;
+    border: 3px solid var(--scrollbarBG);
 }
 
- /* The horizontal scroller */
-  .scroller {
+/* The horizontal scroller */
+.scroller {
     display: flex;
     gap: var(--gap);
     overflow-x: auto;
-    scroll-behavior: smooth;               /* native smooth scroll */
-    -webkit-overflow-scrolling: touch;     /* momentum on iOS */
-    scroll-snap-type: x mandatory;         /* snap to items */
+    scroll-behavior: smooth;
+    /* native smooth scroll */
+    -webkit-overflow-scrolling: touch;
+    /* momentum on iOS */
+    scroll-snap-type: x mandatory;
+    /* snap to items */
     padding: 1rem;
     border-radius: .75rem;
     background: linear-gradient(180deg, #fff, #fbfbff);
-    box-shadow: 0 6px 18px rgba(20,20,40,0.06);
-    cursor: grab;                          /* changes while dragging via JS */
+    box-shadow: 0 6px 18px rgba(20, 20, 40, 0.06);
+    cursor: grab;
+    /* changes while dragging via JS */
     user-select: none;
-  }
+}
 
-  /* Individual items */
-  .item {
-    flex: 0 0 var(--item-w);               /* fixed width items */
+/* Individual items */
+.item {
+    flex: 0 0 var(--item-w);
+    /* fixed width items */
     height: 180px;
     border-radius: .6rem;
-    background: linear-gradient(135deg,#e8f1ff,#fef3e6);
+    background: linear-gradient(135deg, #e8f1ff, #fef3e6);
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 600;
     font-size: 1rem;
-    scroll-snap-align: start;              /* snap alignment */
-    box-shadow: 0 6px 14px rgba(18,18,40,0.06);
-  }
+    scroll-snap-align: start;
+    /* snap alignment */
+    box-shadow: 0 6px 14px rgba(18, 18, 40, 0.06);
+}
 
-  /* Hide default scrollbars (graceful fallback) */
-  .scroller {
-    scrollbar-width: thin;                 /* firefox */
-    scrollbar-color: rgba(0,0,0,0.18) transparent;
-  }
-  .scroller::-webkit-scrollbar{ height: 9px; }
-  .scroller::-webkit-scrollbar-track{ background: transparent; }
-  .scroller::-webkit-scrollbar-thumb{
-    background: rgba(0,0,0,0.12);
+/* Hide default scrollbars (graceful fallback) */
+.scroller {
+    scrollbar-width: thin;
+    /* firefox */
+    scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+}
+
+.scroller::-webkit-scrollbar {
+    height: 9px;
+}
+
+.scroller::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.12);
     border-radius: 999px;
-  }
+}
 
 .cart-container {
     position: relative;
