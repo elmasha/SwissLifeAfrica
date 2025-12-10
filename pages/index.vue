@@ -85,8 +85,8 @@
                     </div> -->
                     <v-expand-transition>
                         <div v-show="OrderTag">
-                            <div style="flex-basis: 20%">
-                                <v-toolbar light width="30%" elevation="0" color="white">
+                            <div style="flex-basis: 30%">
+                                <v-toolbar light width="50%" elevation="0" color="white">
                                     <v-btn to="/bulk_shop" icon style="margin-left: 0px;">
                                         <v-icon>mdi-truck-fast</v-icon>
                                     </v-btn>

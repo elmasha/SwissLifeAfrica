@@ -93,7 +93,7 @@
                     </v-card>
 
                 </v-col>
-                <v-col cols="6" md="12" class="">
+                <v-col cols="6" md="4" class="">
                     <v-card elevation="0" color="transparent">
                         <v-img :src="t6" contain height="150"></v-img>
                         <v-card-subtitle>
@@ -108,6 +108,20 @@
 
                 </v-col>
 
+                <v-col cols="6" md="4" class="">
+                    <v-card elevation="0" color="transparent">
+                        <v-img :src="t6" contain height="150"></v-img>
+                        <v-card-subtitle>
+                            <b style="font-size: 1.1rem; font-weight: 700; color: black;">Elmasha Omondi
+                            </b>
+                            <p>Heat of IT
+                                <br>
+                                Nairobi / Kenya</p>
+                        </v-card-subtitle>
+
+                    </v-card>
+
+                </v-col>
             </v-row>
         </div>
 
