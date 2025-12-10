@@ -90,7 +90,7 @@
                                     <v-btn to="/bulk_shop" icon style="margin-left: 0px;">
                                         <v-icon>mdi-truck-fast</v-icon>
                                     </v-btn>
-                                                                        <span v-if="order_count > 0" style="color: black; font-size: 1.0rem; font-weight: 900;">{{ order_count}}</span>
+                                    <span v-if="order_count > 0" style="color: black; font-size: 1.0rem; font-weight: 900;">{{ order_count}}</span>
 
                                     <nuxt-link style="margin-left: 8px; text-decoration: none;" to="/bulk_shop">Track orders</nuxt-link>
                                     <v-spacer></v-spacer>
@@ -139,8 +139,8 @@
                             </v-alert>
                             <v-spacer></v-spacer>
                         </div>
-                        <v-card v-scroll.self="onScroll" class="overflow-x-auto" max-height="500" elevation="0">
-                            <div class="container" id="all_items2">
+                        <v-card  elevation="0">
+                            <div class="container" id="all_items5">
                                 <div class="row">
 
                                     <div v-for="(product, id) in products" :key="id" class="col-md-3">
@@ -282,7 +282,7 @@
                             </div>
 
                         </div>
-                        <div class="row" id="all_items2">
+                        <div class="row" id="all_items5">
                             <div v-for="(item, id) in cart_items" :key="id" class="col-md-3">
                                 <v-list-item>
                                     <v-list-item-icon>
@@ -485,21 +485,21 @@ export default {
     },
     methods: {
         loginAnonymously1() {
-      this.$fire.auth
-        .signInAnonymously()
-        .catch(function (error) {
-          this.snackbarText = error.message;
-          this.snackbar = true;
-          this.showLogin = false;
-        })
-        .then((user) => {
-          //we are signed in
-          const start_time = this.$dayjs(new Date()).format("YYYY/MM/DD HH:mm:ss");
-          this.UID = user.user.uid;
-          console.log(uuid.v1());
-          this.show_auth = true;
-        });
-    },
+            this.$fire.auth
+                .signInAnonymously()
+                .catch(function (error) {
+                    this.snackbarText = error.message;
+                    this.snackbar = true;
+                    this.showLogin = false;
+                })
+                .then((user) => {
+                    //we are signed in
+                    const start_time = this.$dayjs(new Date()).format("YYYY/MM/DD HH:mm:ss");
+                    this.UID = user.user.uid;
+                    console.log(uuid.v1());
+                    this.show_auth = true;
+                });
+        },
         async Fetch_Orders() {
             let that = this;
             that.orders.splice(0, that.orders.length);
@@ -752,7 +752,7 @@ export default {
     background-size: cover;
 }
 
-#all_items2 {
+#all_items5 {
     --scrollbarBG: #00000000;
     --thumbBG: #2f2c2c00;
     scrollbar-width: thin;
@@ -762,18 +762,18 @@ export default {
     align-items: start;
     bottom: 0;
     padding: 3px;
-    height: 500px;
+    max-height: 500px;
 }
 
-#all_items2::-webkit-scrollbar {
+#all_items5::-webkit-scrollbar {
     width: 8px;
 }
 
-#all_items2::-webkit-scrollbar-track {
+#all_items5::-webkit-scrollbar-track {
     background: var(--scrollbarBG);
 }
 
-#all_items2::-webkit-scrollbar-thumb {
+#all_items5::-webkit-scrollbar-thumb {
     background-color: var(--thumbBG);
     border-radius: 8px;
     border: 3px solid var(--scrollbarBG);
