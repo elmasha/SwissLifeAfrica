@@ -171,6 +171,7 @@ export default {
 body{
      font-family: "Quicksand", sans-serif;
       overflow: unset;
+      scroll-behavior: smooth;
 }
 
 * {
