@@ -64,7 +64,7 @@
         <v-navigation-drawer v-model="drawer" absolute right style="margin-top: 120px;" elevation="0">
         </v-navigation-drawer>
     </div>
-    <v-card color="white" elevation="0" style="margin-top: 40px;">
+    <v-card color="white" elevation="0" style="margin-top: 40px;" class="parallax_about">
         <v-row justify="" v-resize="onResize">
             <v-col cols="12" sm="12" md="12"></v-col>
             <v-col cols="12" sm="12" md="12"></v-col>
@@ -598,6 +598,16 @@ export default {
 .blur {
     filter: blur(9px);
     /* Adjust the value (5px) to increase or decrease the blur intensity */
+}
+
+
+.parallax_about {
+    /* Background image */
+    background-image: url('~/assets/p_about.png');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #charter {

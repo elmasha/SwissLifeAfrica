@@ -134,10 +134,10 @@
                                 <h1>Best Sellers</h1>
                                 <label for="">Best selling categories</label>
                                 <v-chip-group column>
-                                    <v-chip color="black" text-color="white" small>20% OFF</v-chip>
+                                    <!-- <v-chip color="black" text-color="white" small>20% OFF</v-chip>
                                     <v-chip color="black" outlined text-color="black" small>20% OFF</v-chip>
                                     <v-chip color="black" outlined text-color="black" small>20% OFF</v-chip>
-                                    <v-chip color="black" outlined text-color="black" small>20% OFF</v-chip>
+                                    <v-chip color="black" outlined text-color="black" small>20% OFF</v-chip> -->
                                 </v-chip-group>
                             </div>
                             <v-spacer></v-spacer>
