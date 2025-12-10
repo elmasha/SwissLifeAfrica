@@ -27,7 +27,7 @@
             </v-menu>
 
             <v-toolbar-title>
-                <v-img :src="logo" contain width="120" height="30"></v-img>
+                 <nuxt-link style="text-decoration: none;" to="/"><v-img :src="logo" contain width="120" height="30"></v-img></nuxt-link>  
             </v-toolbar-title>
 
             <v-spacer></v-spacer>

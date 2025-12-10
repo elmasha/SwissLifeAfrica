@@ -27,7 +27,7 @@
             </v-menu>
 
             <v-toolbar-title>
-                <v-img :src="logo" contain width="120" height="30"></v-img>
+                 <nuxt-link style="text-decoration: none;" to="/"><v-img :src="logo" contain width="120" height="30"></v-img></nuxt-link>  
             </v-toolbar-title>
 
             <v-spacer></v-spacer>
@@ -256,6 +256,8 @@
                     </b>
                 </v-card-subtitle>
                 <v-card-text>
+                      <b style="font-size: 0.7rem;">Description:</b> <br>
+                    <p style="font-size: 1.1rem;">{{ cartProduct.description }}</p> <br>
                     Now
                     <br>
                     <b style="font-size: 1.2rem; font-weight: 700; color: black;">Ksh {{ numeral(cartProduct.price * quantity).format("0,0")}}</b>

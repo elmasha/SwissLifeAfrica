@@ -27,7 +27,9 @@
             </v-menu>
 
             <v-toolbar-title>
-                <v-img :src="logo" contain width="120" height="30"></v-img>
+                <nuxt-link style="text-decoration: none;" to="/">
+                    <v-img :src="logo" contain width="120" height="30"></v-img>
+                </nuxt-link>
             </v-toolbar-title>
 
             <v-spacer></v-spacer>
@@ -63,7 +65,7 @@
         <v-navigation-drawer v-model="drawer" absolute right style="margin-top: 120px;" elevation="0">
         </v-navigation-drawer>
     </div>
-    <v-card color="white" elevation="0" style="margin-top: 40px;">
+    <v-card color="white parallax_about " elevation="0" style="margin-top: 40px;">
         <v-row v-resize="onResize">
 
             <v-col cols="12" sm="12" md="12"> </v-col>
@@ -84,18 +86,31 @@
                             </v-chip-group>
                         </div>
                         <v-spacer></v-spacer>
-                      
+
                     </div>
-                    
-                 
 
                 </div>
             </v-col>
-            <v-col cols="12" sm="6" md="6"> 
+            <v-col cols="12" sm="6" md="6">
                 <div class="container" style="padding:0px; background-color: aliceblue;border-radius: 12px solid ;">
-                       <v-card  elevation="0">
+                    <v-card  elevation="0" class="pa-0" v-show="showBurger">
+                        <div class="">
+                            <div class="">
+                                <v-alert border="left" colored-border type="info" elevation="0">
+                                    Shipping Time: Estimated delivery in 35 days.Shipping is Covered by SwissLife
+
+                                </v-alert>
+
+                                <v-alert border="left" colored-border type="info" elevation="0">
+
+                                    Note: Orders are collected on the first working day of each month.
+                                </v-alert>
+                            </div>
+                        </div>
+                    </v-card>
+                    <v-card elevation="0">
                         <div class="container" id="all_items3">
-                            <div class="row" >
+                            <div class="row">
 
                                 <div v-for="(order, id) in orders" :key="id" class="col-md-12">
 
@@ -109,12 +124,12 @@
                                                 </v-card-title>
 
                                                 <v-card-subtitle>
-                                                  <div>
-                                                      fulfillment status <b>{{ order.fulfillment_status }}</b>
-                                                  </div>
-                                                  <div>
-                                                     <h4 style="font-size: 1.0rem; padding: 6px;"> Total Ksh <b>{{ numeral(order.total_amount).format("0,0.0") }}</b></h4>
-                                                  </div>
+                                                    <div>
+                                                        fulfillment status <b>{{ order.fulfillment_status }}</b>
+                                                    </div>
+                                                    <div>
+                                                        <h4 style="font-size: 1.0rem; padding: 6px;"> Total Ksh <b>{{ numeral(order.total_amount).format("0,0.0") }}</b></h4>
+                                                    </div>
                                                 </v-card-subtitle>
                                             </div>
                                             <v-spacer></v-spacer>
@@ -134,9 +149,9 @@
                                                 <v-divider></v-divider>
 
                                                 <v-card-text>
-                                                    <div class="row" >
+                                                    <div class="row">
                                                         <div v-for="nom in order.items" :key="nom.product_id">
-                                                            <div class="nominee-header" >
+                                                            <div class="nominee-header">
                                                                 <div class="container">
                                                                     <div class="d-flex">
                                                                         <div>
@@ -148,7 +163,7 @@
                                                                     </div>
 
                                                                     <h5> <strong>{{ nom.name }}</strong></h5>
-                                                                    <p style="margin: 3px;">Ksh   <b>{{numeral( nom.price).format("0,0.0")}}</b>  </p>
+                                                                    <p style="margin: 3px;">Ksh <b>{{numeral( nom.price).format("0,0.0")}}</b> </p>
                                                                 </div>
                                                             </div>
                                                             <br>
@@ -169,15 +184,27 @@
                 </div>
             </v-col>
             <v-col cols="12" sm="6" md="6">
-                <div class="container">
+                <v-card color="#eefcdd" elevation="0" class="pa-4" v-show="!showBurger">
                     <div class="container">
-                        <v-img :src="ord" contain height="400" ></v-img>
+                        <div class="container">
+                            <v-alert border="left" colored-border type="info" elevation="0">
+                                Shipping Time: Estimated delivery in 35 days.Shipping is Covered by SwissLife
+
+                            </v-alert>
+
+                            <v-alert border="left" colored-border type="info" elevation="0">
+
+                                Note: Orders are collected on the first working day of each month.
+                            </v-alert>
+                            <v-img :src="ord" contain height="400"></v-img>
+                        </div>
                     </div>
-                </div>
+                </v-card>
+
             </v-col>
         </v-row>
         <div>
-          
+
         </div>
         <v-snackbar color="primary accent-8" :timeout="6000" v-model="snackbar_s" centered bottom>
             {{ snackbarText_s }}
@@ -641,6 +668,15 @@ export default {
 </script>
 
 <style>
+.parallax_about {
+    /* Background image */
+    background-image: url('~/assets/p_about.png');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 #all_items3 {
     --scrollbarBG: #00000000;
     --thumbBG: #2f2c2c00;

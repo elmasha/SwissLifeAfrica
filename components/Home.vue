@@ -1,7 +1,7 @@
 <!-- Please remove this file from your project -->
 <template>
 <div>
-    <v-img with="100%" :src="bg" height="700">
+    <v-img with="100%" :src="bg" height="700" style="margin-top: 0px;">
 
         <div style="background: linear-gradient(to right, rgba(140, 198, 63, 0.8),rgba(139, 198, 63, 0.685), rgba(255, 255, 255, 0.1));
                                     padding: 30px 50px;

@@ -27,7 +27,7 @@
             </v-menu>
 
             <v-toolbar-title>
-                <v-img :src="logo" contain width="120" height="30"></v-img>
+                  <nuxt-link style="text-decoration: none;" to="/"><v-img :src="logo" contain width="120" height="30"></v-img></nuxt-link>  
             </v-toolbar-title>
 
             <v-spacer></v-spacer>
@@ -64,7 +64,7 @@
         </v-navigation-drawer>
     </div>
     <v-card color="white" elevation="0" style="margin-top: 40px;">
-        <v-row  v-resize="onResize">
+        <v-row v-resize="onResize">
 
             <v-col cols="12" sm="12" md="12"> </v-col>
 
@@ -89,7 +89,7 @@
                         <div class="my-8">
                             <div>
                                 <div class="text-right">
-                                    <span style="font-size: 0.8rem; margin:9px;"> B2B bulk purchase</span> <br> 
+                                    <span style="font-size: 0.8rem; margin:9px;"> B2B bulk purchase</span> <br>
                                     <!-- :to="`b2b/${'JIWE18KXjOfWuDe2yweDrTPrFNm1'}`  -->
                                     <v-btn large outlined rounded @click="checkBusiness()">
                                         B2B / Bulk
@@ -127,7 +127,7 @@
                                             <v-rating :value="4.5" color="amber" dense half-increments readonly size="14"></v-rating>
 
                                             <div class="grey--text ms-4">
-                                                4.5 
+                                                4.5
                                             </div>
                                         </v-row>
                                         <v-card-text>
@@ -240,10 +240,28 @@
                 </v-card-actions>
                 <v-img :src="cartProduct.image_url" contain height="150"></v-img>
                 <v-card-subtitle style=" margin-top: 20px;">
-                    <b style="font-size: 1.3rem; font-weight: 700; color: black;"> {{ cartProduct.name }}
-                    </b>
+                    <div class="d-flex">
+                        <div>
+                            <b style="font-size: 1.3rem; font-weight: 700; color: black;"> {{ cartProduct.name }}
+                            </b>
+                        </div>
+                        <v-spacer></v-spacer>
+                        <div style="padding: 12px;">
+                            <v-row align="start" class="mx-0">
+                                <v-rating :value="4.5" color="amber" dense half-increments readonly size="14"></v-rating>
+
+                                <div class="grey--text ms-4">
+                                    4.5 (413)
+                                </div>
+                            </v-row>
+                        </div>
+                    </div>
+
                 </v-card-subtitle>
+
                 <v-card-text>
+                    <b style="font-size: 0.7rem;">Description:</b> <br>
+                    <p style="font-size: 1.1rem;">{{ cartProduct.description }}</p> <br>
                     Now
                     <br>
                     <b style="font-size: 1.2rem; font-weight: 700; color: black;">Ksh {{ numeral(cartProduct.price * quantity).format("0,0")}}</b>
@@ -276,9 +294,9 @@
                 <v-btn icon @click="BsAuth = false" style="position: absolute; right: 10px; top: 10px; z-index: 1000;">
                     <v-icon color="red">mdi-close</v-icon>
                 </v-btn>
-                 <business-auth></business-auth>
+                <business-auth></business-auth>
             </v-card>
-           
+
         </v-dialog>
 
     </v-card>

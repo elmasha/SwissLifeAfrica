@@ -37,17 +37,21 @@
                 </div>
             </v-col>
             <v-col cols="12" md="7">
-                <v-form v-model="valid" style="margin-top: 10px;">
+                <v-card color="#eefcdd" elevation="0" class="pa-4">
+                    <v-card-title>
+                        <h2>Get in Touch</h2>
+                    </v-card-title>
+                    <v-form v-model="valid" style="margin-top: 10px;">
                     <v-container>
                         <v-row>
                             <v-col cols="12" md="6">
-                                <v-text-field v-model="firstname" :counter="10" label="Full name" required></v-text-field>
+                                <v-text-field outlined rounded v-model="firstname" :counter="10" label="Full name" required></v-text-field>
+                            </v-col>
+                            <v-col cols="12" md="6">
+                                <v-text-field outlined rounded v-model="email" label="E-mail" required></v-text-field>
                             </v-col>
                             <v-col cols="12" md="12">
-                                <v-text-field v-model="email" label="E-mail" required></v-text-field>
-                            </v-col>
-                            <v-col cols="12" md="12">
-                                <v-textarea v-model="email" label="Send a Message" required></v-textarea>
+                                <v-textarea outlined rounded v-model="email" label="Send a Message" required></v-textarea>
                             </v-col>
                             <v-col cols="12" md="12">
                                 <v-btn large outlined rounded>
@@ -61,6 +65,9 @@
                         </v-row>
                     </v-container>
                 </v-form>
+
+                </v-card>
+                
             </v-col>
         </v-row>
     </div>

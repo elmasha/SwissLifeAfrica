@@ -29,7 +29,7 @@
                     </v-menu>
 
                     <v-toolbar-title>
-                        <v-img :src="logo" contain width="120" height="30"></v-img>
+                      <nuxt-link style="text-decoration: none;" to="/"><v-img :src="logo" contain width="120" height="30"></v-img></nuxt-link>   
                     </v-toolbar-title>
 
                     <v-spacer></v-spacer>
@@ -83,8 +83,26 @@
                             </v-btn>
                         </div>
                     </div> -->
-                    <v-expand-transition>
-                        <div v-show="OrderTag">
+                    <v-expand-transition >
+                        <v-card color="#eefcdd" elevation="0" class="pa-2 mb-4" v-show="OrderTag" style="position: fixed; top: 80px; left: 20px; z-index: 1000; width: auto; max-width: 300px;">
+                            <div class="d-flex">
+                                <div>
+                                    <v-icon color="green">mdi-truck-fast</v-icon>
+                                </div>
+                                <div style="margin-left: 8px;">
+                                    You have {{ order_count }} {{ order_msg }}. <br>
+                                    <nuxt-link style="text-decoration: none;" to="/orders">Track your orders here</nuxt-link>
+                                </div>
+                                <v-spacer></v-spacer>
+                                <div>
+                                    <v-btn :disabled="OrderTag" icon color="red" small @click="OrderTag = false" style="margin-right: 6px;">
+                                        <v-icon small>mdi-close</v-icon>
+                                    </v-btn>
+                                </div>
+                            </div>
+
+                        </v-card>
+                        <!-- <div v-show="OrderTag">
                             <div style="flex-basis: 30%">
                                 <v-toolbar light width="50%" elevation="0" color="white">
                                     <v-btn to="/bulk_shop" icon style="margin-left: 0px;">
@@ -100,10 +118,10 @@
                                     </v-btn>
                                 </v-toolbar>
                             </div>
-                        </div>
+                        </div> -->
                     </v-expand-transition>
 
-                    <home :showBurger="showBurger" @send-data="handleData"></home>
+                    <home :showBurger="showBurger" @send-data="handleData" style="margin-top: 0px;"></home>
                 </section>
 
             </v-col>
@@ -139,41 +157,41 @@
                             </v-alert>
                             <v-spacer></v-spacer>
                         </div>
-                        <v-card  elevation="0">
-                            <div class="container" id="all_items5">
-                                <div class="row">
+                        <v-card elevation="0" >
+                            <div style="overflow-x: auto; white-space: nowrap; padding-bottom: 10px;">
+                                <div style="display: flex; gap: 16px;">
 
-                                    <div v-for="(product, id) in products" :key="id" class="col-md-3">
+                                    <div v-for="(product, id) in products" :key="id" class="col-md-3" style="flex: 0 0 auto; width: 250px;">
 
                                         <v-card elevation="0" color="transparent">
                                             <v-img :src="product.image_url" contain height="150"></v-img>
+
                                             <v-card-subtitle>
-                                                <b style="font-size: 1.1rem; font-weight: 700; color: black;"> {{ product.name }}
-                                                </b>
+                                                <b style="font-size: 1.1rem; font-weight: 700; color: black;">{{ product.name }}</b>
                                             </v-card-subtitle>
+
                                             <v-row align="center" class="mx-6">
                                                 <v-rating :value="4.5" color="amber" dense half-increments readonly size="14"></v-rating>
-
-                                                <div class="grey--text ms-4">
-                                                    4.5 (413)
-                                                </div>
+                                                <div class="grey--text ms-4">4.5 </div>
                                             </v-row>
-                                            <v-card-text>
 
-                                                <br>
-                                                Now
-                                                <br>
-                                                <b style="font-size: 1.2rem; font-weight: 700; color: black;">Ksh {{ numeral(product.price).format("0,0.0") }}</b>
+                                            <v-card-text>
+                                                <br> Now <br>
+                                                <b style="font-size: 1.2rem; font-weight: 700; color: black;">
+                                                    Ksh {{ numeral(product.price).format("0,0.0") }}
+                                                </b>
                                             </v-card-text>
+
                                             <v-card-actions>
-                                                <v-btn rounded color="black" style="color: aliceblue;" small @click="add_Cart = true,quantity=1,cartProduct = product">Add to cart <v-icon>mdi-cart</v-icon>
+                                                <v-btn rounded color="black" style="color: aliceblue;" small @click="add_Cart = true, quantity = 1, cartProduct = product">
+                                                    Add to cart <v-icon>mdi-cart</v-icon>
                                                 </v-btn>
                                                 <v-spacer></v-spacer>
-
                                             </v-card-actions>
                                         </v-card>
 
                                     </div>
+
                                 </div>
                             </div>
                         </v-card>
@@ -283,6 +301,7 @@
 
                         </div>
                         <div class="row" id="all_items5">
+
                             <div v-for="(item, id) in cart_items" :key="id" class="col-md-3">
                                 <v-list-item>
                                     <v-list-item-icon>
@@ -394,6 +413,7 @@ export default {
     },
     data() {
         return {
+            order_msg: "Order",
             OrderTag: false,
             info: null,
             scrollInvoked: 0,
@@ -513,6 +533,11 @@ export default {
                         that.order_count = response.data.length;
                         if (that.order_count > 0) {
                             that.OrderTag = true;
+                            if (that.order_count > 1) {
+                                that.order_msg = "Orders"
+                            } else {
+                                that.order_msg = "Order"
+                            }
                         } else {
                             that.OrderTag = false;
                         }
@@ -762,7 +787,7 @@ export default {
     align-items: start;
     bottom: 0;
     padding: 3px;
-    max-height: 500px;
+    height: 500px;
 }
 
 #all_items5::-webkit-scrollbar {
