@@ -5,7 +5,7 @@ export default {
   ssr: false,
    server: {
     host: '127.0.0.1',
-    port: 3000
+    port: 4000
   },
 
   // Target: https://go.nuxtjs.dev/config-target
@@ -74,13 +74,13 @@ export default {
       "@nuxtjs/firebase",
       {
         config: {
-          apiKey: "AIzaSyAF1CYyGUcM2d_Ut1jvkCFiT9n2bS-JIwc",
-          authDomain: "mock-26efe.firebaseapp.com",
-          projectId: "mock-26efe",
-          storageBucket: "mock-26efe.appspot.com",
-          messagingSenderId: "860033241212",
-          appId: "1:860033241212:web:b9e62b50103ad2170d39f9",
-          measurementId: "G-C1KR12P7KT"
+        apiKey: "AIzaSyAwLDEb3zYp9_0KNzrmz4reYgI3Y6iFCkg",
+        authDomain: "swiife-260ff.firebaseapp.com",
+        projectId: "swiife-260ff",
+        storageBucket: "swiife-260ff.firebasestorage.app",
+        messagingSenderId: "872066992824",
+        appId: "1:872066992824:web:b76134c4b884354b13424d",
+        measurementId: "G-29FZ1PJ8HL"
         },
         services: {
           auth: {

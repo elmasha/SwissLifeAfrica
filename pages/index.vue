@@ -16,14 +16,14 @@
                                 <v-list-item-title></v-list-item-title>
                             </v-list-item> -->
 
-                            <v-list-item> <a id="link" @click.prevent="scrollToSection('home')" style="margin: 8px;">Home</a></v-list-item>
-                            <v-list-item><a id="link" @click.prevent="scrollToSection('about')" style="margin: 8px;">About</a></v-list-item>
+                            <v-list-item> <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">Home</a></v-list-item>
+                            <v-list-item><a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">About</a></v-list-item>
                             <v-list-item><a id="link" @click.prevent="scrollToSection1('shop')" style="margin: 8px;">Shop</a></v-list-item>
-                            <v-list-item> <a id="link" @click.prevent="scrollToSection('team')" style="margin: 8px;">Team</a></v-list-item>
+                            <v-list-item> <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">Team</a></v-list-item>
                             <v-list-item> <a id="link" @click.prevent="scrollToSection1('certifications')" style="margin: 8px;">Certifications</a></v-list-item>
-                            <v-list-item> <a id="link" @click.prevent="scrollToSection('faq')" style="margin: 8px;">FAQ</a></v-list-item>
-                            <v-list-item> <a id="link" @click.prevent="scrollToSection('contact')" style="margin: 8px;">Contact</a></v-list-item>
-                            <v-list-item><a id="link" @click.prevent="scrollToSection('terms')" style="margin: 8px;">terms</a></v-list-item>
+                            <v-list-item> <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">FAQ</a></v-list-item>
+                            <v-list-item> <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">Contact</a></v-list-item>
+                            <v-list-item><a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">terms</a></v-list-item>
 
                         </v-list>
                     </v-menu>
@@ -34,14 +34,14 @@
 
                     <v-spacer></v-spacer>
                     <div v-show="!showBurger" id="nav_bar_links">
-                        <a id="link" @click.prevent="scrollToSection('home')" style="margin: 8px;">Home</a>
-                        <a id="link" @click.prevent="scrollToSection('about')" style="margin: 8px;">About</a>
+                        <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">Home</a>
+                        <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">About</a>
                         <a id="link" @click.prevent="scrollToSection1('shop')" style="margin: 8px;">Shop</a>
-                        <a id="link" @click.prevent="scrollToSection('team')" style="margin: 8px;">Team</a>
+                        <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">Team</a>
                         <a id="link" @click.prevent="scrollToSection1('certifications')" style="margin: 8px;">Certifications</a>
-                        <a id="link" @click.prevent="scrollToSection('faq')" style="margin: 8px;">FAQ</a>
-                        <a id="link" @click.prevent="scrollToSection('contact')" style="margin: 8px;">Contact</a>
-                        <a id="link" @click.prevent="scrollToSection('terms')" style="margin: 8px;">terms</a>
+                        <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">FAQ</a>
+                        <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">Contact</a>
+                        <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">terms</a>
                     </div>
                     <v-spacer></v-spacer>
 
@@ -52,64 +52,58 @@
                     <div class="cart-container d-flex align-center">
                         <v-btn icon class="cart-btn" color="primary" @click="drawer2 = !drawer2">
                             <v-icon medium>mdi-cart-outline</v-icon>
-                            <v-badge v-if="totalItems > 0" :content="totalItems" style="margin-top: 10px; margin-right: 10px;" color="red" overlap bordered class="cart-badge"></v-badge>
+                            <span v-if="totalItems > 0" style="background-color: red; color: white; border-radius: 360px;padding: 3px; font-size: 0.7rem; font-weight: 1000;">{{ totalItems}}</span>
+
+                            <!-- <v-badge v-if="totalItems > 0" :content="totalItems" style="margin-right: 30px;margin-top: 10px; width: 100%;" color="red" overlap bordered class="cart-badge">{{ totalItems}}</v-badge> -->
                         </v-btn>
                     </div>
+                    <v-btn icon @click="$fire.auth.signOut()" v-if="show_auth">
+                        <v-icon>mdi-logout</v-icon>
+                    </v-btn>
 
                 </v-app-bar>
-                <v-navigation-drawer v-model="drawer" absolute right style="margin-top: 120px;" elevation="0">
-                    <template v-slot:prepend>
-                        <v-list-item two-line>
-
-                            <div>
-                                <v-list-item-content>
-                                    <v-list-item-subtitle>{{ totalItems }} items</v-list-item-subtitle>
-                                    <v-list-item-title>Ksh/=<b> {{ numeral(total_price).format("0,0.0")  }}</b></v-list-item-title>
-
-                                </v-list-item-content>
-                                <div>
-
-                                </div>
-                                <div style="padding: 2px;">
-
-                                    <v-btn rounded color="green" :to="`checkout/${uid}`">Check Out</v-btn>
-                                    <p></p>
-                                    <v-btn text color="red" @click="clearCart">Clear cart</v-btn>
-                                </div>
-                            </div>
-                            <br>
-                        </v-list-item>
-                    </template>
-
-                    <v-list three-line>
-                        <v-list-item v-for="item in cart_items" :key="item.title">
-                            <v-list-item-icon>
-                                <div class="d-flex">
-                                    <!-- @click="removeFromCart(item)" -->
-                                    <v-btn icon small @click="removeFromCart(item)">
-                                        <v-icon color="red">mdi-close-circle</v-icon>
-                                    </v-btn>
-                                    <v-img height="50" contain width="50" :src=" item.image_url"></v-img>
-                                </div>
-                            </v-list-item-icon>
-
-                            <v-list-item-content>
-                                <v-list-item-title>{{ item.name }}</v-list-item-title>
-                                <br>
-                                <v-list-item-subtitle>Qty: {{ item.quantity }} | Ksh {{ item.price }}</v-list-item-subtitle>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list>
-                </v-navigation-drawer>
 
             </div>
         </v-col>
         <v-row>
             <v-col cols="12" md="12"></v-col>
             <v-col cols="12" md="12"></v-col>
+
             <v-col cols="12" md="12">
+
                 <section id="home" class="bg-gray-100 ">
-                    <home :showBurger="showBurger"></home>
+                    <!-- <div class="container">
+                        <div class="d-flex">
+                            <div>
+                                <v-icon>mdi-account</v-icon>
+                            </div>
+                            <v-spacer></v-spacer>
+                            <v-btn icon>
+                                <v-icon>mdi-close</v-icon>
+                            </v-btn>
+                        </div>
+                    </div> -->
+                    <v-expand-transition>
+                        <div v-show="OrderTag">
+                            <div style="flex-basis: 20%">
+                                <v-toolbar light width="30%" elevation="0" color="white">
+                                    <v-btn to="/bulk_shop" icon style="margin-left: 0px;">
+                                        <v-icon>mdi-truck-fast</v-icon>
+                                    </v-btn>
+                                                                        <span v-if="order_count > 0" style="color: black; font-size: 1.0rem; font-weight: 900;">{{ order_count}}</span>
+
+                                    <nuxt-link style="margin-left: 8px; text-decoration: none;" to="/bulk_shop">Track orders</nuxt-link>
+                                    <v-spacer></v-spacer>
+
+                                    <v-btn :disabled="OrderTag" icon color="red" small @click="OrderTag = false" style="margin-right: 6px;">
+                                        <v-icon small>mdi-close</v-icon>
+                                    </v-btn>
+                                </v-toolbar>
+                            </div>
+                        </div>
+                    </v-expand-transition>
+
+                    <home :showBurger="showBurger" @send-data="handleData"></home>
                 </section>
 
             </v-col>
@@ -117,10 +111,9 @@
                 <section id="shop" class=" ">
                     <div class="container my-0 ">
                         <div class="d-flex">
-                            <div>
+                            <div class="container">
 
                                 <h1>Best Sellers</h1>
-
                                 <label for="">Best selling categories</label>
                                 <v-chip-group column>
                                     <v-chip color="black" text-color="white" small>20% OFF</v-chip>
@@ -130,42 +123,61 @@
                                 </v-chip-group>
                             </div>
                             <v-spacer></v-spacer>
-                            <div class="my-8">
-                                <div class="d-flex">
-                                    <nuxt-link href="#" style="text-decoration: none; color: black; font-weight: 600; font-size: 1.2rem;" to="/shop">View All</nuxt-link>
-                                    <v-icon color="black" large>mdi-chevron-right</v-icon>
-                                </div>
+                            <div class="">
+                                <v-btn outlined rounded to="/shop" style="margin-right: 20px;">
+                                    View All
+                                    <v-icon right dark>
+                                        mdi-chevron-right
+                                    </v-icon>
+                                </v-btn>
 
                             </div>
                         </div>
+                        <div class="d-flex">
+                            <v-alert border="left" colored-border type="info" elevation="0">
+                                Next order collection in the next 30days
+                            </v-alert>
+                            <v-spacer></v-spacer>
+                        </div>
+                        <v-card v-scroll.self="onScroll" class="overflow-x-auto" max-height="500" elevation="0">
+                            <div class="container" id="all_items2">
+                                <div class="row">
 
-                        <div class="container" id="all_items2">
-                            <div class="row">
+                                    <div v-for="(product, id) in products" :key="id" class="col-md-3">
 
-                                <div v-for="(product, id) in products" :key="id" class="col-md-3">
+                                        <v-card elevation="0" color="transparent">
+                                            <v-img :src="product.image_url" contain height="150"></v-img>
+                                            <v-card-subtitle>
+                                                <b style="font-size: 1.1rem; font-weight: 700; color: black;"> {{ product.name }}
+                                                </b>
+                                            </v-card-subtitle>
+                                            <v-row align="center" class="mx-6">
+                                                <v-rating :value="4.5" color="amber" dense half-increments readonly size="14"></v-rating>
 
-                                    <v-card elevation="0" color="transparent">
-                                        <v-img :src="product.image_url" contain height="150"></v-img>
-                                        <v-card-subtitle>
-                                            <b style="font-size: 1.1rem; font-weight: 700; color: black;"> {{ product.name }}
-                                            </b>
-                                        </v-card-subtitle>
-                                        <v-card-text>
-                                            Now
-                                            <br>
-                                            <b style="font-size: 1.2rem; font-weight: 700; color: black;">Ksh {{ product.price }}</b>
-                                        </v-card-text>
-                                        <v-card-actions>
-                                            <v-btn rounded color="black" style="color: aliceblue;" small @click="add_Cart = true,quantity=1,cartProduct = product">Add to cart <v-icon>mdi-cart</v-icon>
-                                            </v-btn>
-                                            <v-spacer></v-spacer>
+                                                <div class="grey--text ms-4">
+                                                    4.5 (413)
+                                                </div>
+                                            </v-row>
+                                            <v-card-text>
 
-                                        </v-card-actions>
-                                    </v-card>
+                                                <br>
+                                                Now
+                                                <br>
+                                                <b style="font-size: 1.2rem; font-weight: 700; color: black;">Ksh {{ numeral(product.price).format("0,0.0") }}</b>
+                                            </v-card-text>
+                                            <v-card-actions>
+                                                <v-btn rounded color="black" style="color: aliceblue;" small @click="add_Cart = true,quantity=1,cartProduct = product">Add to cart <v-icon>mdi-cart</v-icon>
+                                                </v-btn>
+                                                <v-spacer></v-spacer>
 
+                                            </v-card-actions>
+                                        </v-card>
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </v-card>
+
                         <div class="features">
                             <div class="container">
                                 <div class="row">
@@ -264,7 +276,7 @@
 
                                 <div>
 
-                                    <v-btn rounded color="green" :to="`checkout/${uid}`" style="color: white;">Check Out</v-btn>
+                                    <v-btn rounded color="green" :to="`checkout/${UID}`" style="color: white;">Check Out</v-btn>
                                     <v-btn text color="red" @click="clearCart">Clear cart</v-btn>
                                 </div>
                             </div>
@@ -307,10 +319,28 @@
             </v-card-actions>
             <v-img :src="cartProduct.image_url" contain height="150"></v-img>
             <v-card-subtitle style=" margin-top: 20px;">
-                <b style="font-size: 1.3rem; font-weight: 700; color: black;"> {{ cartProduct.name }}
-                </b>
+                <div class="d-flex">
+                    <div>
+                        <b style="font-size: 1.3rem; font-weight: 700; color: black;"> {{ cartProduct.name }}
+                        </b>
+                    </div>
+                    <v-spacer></v-spacer>
+                    <div style="padding: 12px;">
+                        <v-row align="start" class="mx-0">
+                            <v-rating :value="4.5" color="amber" dense half-increments readonly size="14"></v-rating>
+
+                            <div class="grey--text ms-4">
+                                4.5 (413)
+                            </div>
+                        </v-row>
+                    </div>
+                </div>
+
             </v-card-subtitle>
+
             <v-card-text>
+                <b style="font-size: 0.7rem;">Description:</b> <br>
+                <p style="font-size: 1.1rem;">{{ cartProduct.description }}</p> <br>
                 Now
                 <br>
                 <b style="font-size: 1.2rem; font-weight: 700; color: black;">Ksh {{ numeral(cartProduct.price * quantity).format("0,0")}}</b>
@@ -364,6 +394,9 @@ export default {
     },
     data() {
         return {
+            OrderTag: false,
+            info: null,
+            scrollInvoked: 0,
             itemTitle: '',
             items: [{
                     title: 'Home'
@@ -390,6 +423,7 @@ export default {
                     title: 'Terms'
                 },
             ],
+
             add_Cart: false,
             cartProduct: false,
             snackbar: false,
@@ -430,12 +464,19 @@ export default {
             bg: require("@/assets/carousel/2.jpg"),
             delivery: require("@/assets/delivery.svg"),
             price: require("@/assets/price.svg"),
-            support: require("@/assets/support.svg")
+            support: require("@/assets/support.svg"),
+            UID: "",
+            cart_tag: "reatail",
+            show_auth: false,
+            orders: [],
+            order_count: 0,
         }
     },
     mounted() {
+        this.checkUser();
         this.Fetch_Products();
         this.Fetch_CartList();
+
         // window.addEventListener('scroll', this.handleScroll);
 
     },
@@ -443,6 +484,105 @@ export default {
         window.removeEventListener('scroll', this.handleScroll)
     },
     methods: {
+        loginAnonymously1() {
+      this.$fire.auth
+        .signInAnonymously()
+        .catch(function (error) {
+          this.snackbarText = error.message;
+          this.snackbar = true;
+          this.showLogin = false;
+        })
+        .then((user) => {
+          //we are signed in
+          const start_time = this.$dayjs(new Date()).format("YYYY/MM/DD HH:mm:ss");
+          this.UID = user.user.uid;
+          console.log(uuid.v1());
+          this.show_auth = true;
+        });
+    },
+        async Fetch_Orders() {
+            let that = this;
+            that.orders.splice(0, that.orders.length);
+            axios
+                .get("https://swisslifeserver-production.up.railway.app/api/orders/user/" + that.UID, {})
+                .then(function (response) {
+                    if (response.status == 200) {
+                        // that.snackbar = true;
+                        // that.snackbarText = response.data;
+                        that.orders = response.data;
+                        that.order_count = response.data.length;
+                        if (that.order_count > 0) {
+                            that.OrderTag = true;
+                        } else {
+                            that.OrderTag = false;
+                        }
+                        console.log("Order", response.data.length);
+
+                    } else if (response.status == 400) {}
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    that.snackbarText2 = error;
+                    that.snackbar2 = true;
+                });
+        },
+        checkUser() {
+            if (this.$fire.auth.currentUser != null) {
+                // alert("Auth: " + true + "UID" +this.$fire.auth.currentUser.uid);
+                console.log(this.$fire.auth.currentUser.uid);
+                this.UID = this.$fire.auth.currentUser.uid;
+                this.Fetch_Orders();
+                this.show_auth = true;
+            } else {
+                this.loginAnonymously1();
+            }
+        },
+        handleData(data) {
+            this.info = data;
+            if (data === null) {
+
+            }
+
+            this.quantity = 1;
+            this.cartProduct = data;
+            console.log("Data received:", this.cartProduct);
+            this.add_Cart = true;
+            // alert("Data received: " + data);
+        },
+        async Search_Products(val) {
+            if (val === "") {
+                this.Fetch_Products();
+            }
+            let that = this;
+            that.products.splice(that.products);
+            axios
+                .get("https://swisslifeserver-production.up.railway.app/api/products/search/?query=" + val, {})
+                .then(function (response) {
+                    if (response.status == 200) {
+                        // that.snackbar = true;
+                        // that.snackbarText = response.data;
+                        if (that.products.length === 0) {
+                            that.snackbar = true;
+                            that.snackbarText = " Items not available";
+                        } else {
+
+                        }
+                        that.products = response.data;
+                    } else if (response.status == 400) {
+                        that.Fetch_Products();
+                        // that.snackbar2 = true;
+                        // that.snackbarText2 = response.data;
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    that.snackbarText2 = error;
+                    that.snackbar2 = true;
+                });
+        },
+        onScroll() {
+            this.scrollInvoked++
+        },
         async checkNav(val) {
             alert("❌", this.itemTitle);
             if (val === 'shop') {
@@ -463,8 +603,8 @@ export default {
         },
         async addToCart(product) {
             try {
-                const res = await axios.post("http://localhost:5000/api/cart/add", {
-                    uid: "grace",
+                const res = await axios.post("https://swisslifeserver-production.up.railway.app/api/cart/add", {
+                    uid: this.cart_tag + "_" + this.UID,
                     image_url: product.image_url,
                     product_id: product.id,
                     quantity: 1,
@@ -482,8 +622,8 @@ export default {
         },
         async removeFromCart(item) {
             try {
-                const res = await axios.post("http://localhost:5000/api/cart/remove/", {
-                    uid: "grace", // 👈 Data must go inside `data`
+                const res = await axios.post("https://swisslifeserver-production.up.railway.app/api/cart/remove/", {
+                    uid: this.cart_tag + "_" + this.UID, // 👈 Data must go inside `data`
                     product_id: item.product_id, // 👈 This will now appear in req.body                 
                 });
 
@@ -498,8 +638,8 @@ export default {
         },
         async clearCart() {
             try {
-                const res = await axios.post("http://localhost:5000/api/cart/clear/", {
-                    uid: "grace", // 👈 Data must go inside `data`
+                const res = await axios.post("https://swisslifeserver-production.up.railway.app/api/cart/clear/", {
+                    uid: this.cart_tag + "_" + this.UID, // 👈 Data must go inside `data`
                 });
                 this.Fetch_CartList();
                 this.snackbar = true;
@@ -513,7 +653,7 @@ export default {
             let that = this;
             that.products.splice(that.products);
             axios
-                .get("http://localhost:5000/api/products/getAll", {})
+                .get("https://swisslifeserver-production.up.railway.app/api/products/products/tag/Best", {})
                 .then(function (response) {
                     if (response.status == 200) {
                         // that.snackbar = true;
@@ -531,9 +671,10 @@ export default {
         },
         async Fetch_CartList() {
             let that = this;
+            let ID = that.cart_tag + "_" + that.UID
             that.cart_items.splice(0, that.cart_items.length);
             axios
-                .get("http://localhost:5000/api/cart/total/grace", {})
+                .get("https://swisslifeserver-production.up.railway.app/api/cart/total/" + ID, {})
                 .then(function (response) {
                     if (response.status == 200) {
                         // that.snackbar = true;
@@ -542,10 +683,10 @@ export default {
                         that.totalItems = response.data.totalItems;
                         that.total_price = response.data.totalAmount;
 
-                        console.log("cart_items", that.cart_items, response.data);
+                        console.log("cart ID", ID);
                     } else if (response.status == 400) {
-                        that.snackbar2 = true;
-                        that.snackbarText2 = response.data;
+                        // that.snackbar2 = true;
+                        // that.snackbarText2 = response.data;
                     }
                 })
                 .catch(function (error) {
@@ -607,7 +748,6 @@ export default {
     background-image: url('~/assets/p_about.png');
     background-attachment: fixed;
     background-position: center;
-    width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -622,7 +762,7 @@ export default {
     align-items: start;
     bottom: 0;
     padding: 3px;
-    height: 700px;
+    height: 500px;
 }
 
 #all_items2::-webkit-scrollbar {
@@ -940,30 +1080,5 @@ export default {
     position: relative;
     z-index: 1;
     max-width: 260px;
-}
-
-/* ✅ Mobile Fix */
-@media (max-width: 768px) {
-    .features {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .feature {
-        width: 100%;
-        padding: 1.5rem 0;
-    }
-
-    .feature .icon-bg img {
-        width: 70px;
-    }
-
-    .feature h3 {
-        font-size: 1.1rem;
-    }
-
-    .feature p {
-        font-size: 0.85rem;
-    }
 }
 </style>

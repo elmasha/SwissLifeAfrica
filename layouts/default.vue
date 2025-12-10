@@ -1,7 +1,7 @@
 <template>
 <v-app dark>
 
-        <v-main >
+    <v-main>
         <Nuxt />
     </v-main>
     <footer bottom fixed>
@@ -34,18 +34,40 @@
                                             <h6 style="font-weight: 200; font-size:0.8rem; margin: 2px;">Follow us on</h6>
                                             <div class="d-flex ">
                                                 <a href="" style="margin: 8px">
-                                                    <v-icon >mdi-facebook</v-icon>
+                                                    <v-icon>mdi-facebook</v-icon>
                                                 </a>
                                                 <a href="" style="margin: 8px">
-                                                    <v-icon >mdi-instagram</v-icon>
+                                                    <v-icon>mdi-instagram</v-icon>
                                                 </a>
                                                 <a href="" style="margin: 8px">
-                                                    <v-icon >mdi-whatsapp</v-icon>
+                                                    <v-icon>mdi-whatsapp</v-icon>
                                                 </a>
                                             </div>
                                         </div>
                                     </v-col>
-                                    <v-col cols="12" md="4"></v-col>
+                                    <v-col cols="12" md="4">
+                                        <div class="container">
+                                            <h2 style="color: #89C53F;">Quick links</h2>
+                                            <div>
+                                                <v-chip-group column style="padding: 0px;">
+                                                    <v-chip color="black" outlined text-color="white" small><a id="link2" @click.prevent="scrollToSection1('')" style="margin: 0px;">Home</a></v-chip>
+                                                    <v-chip color="black" outlined text-color="white" small><a id="link2" @click.prevent="scrollToSection1('')" style="margin: 0px;">About</a></v-chip>
+                                                    <v-chip color="black" outlined text-color="white" small><a id="link2" @click.prevent="scrollToSection1('shop')" style="margin: 0px;">Shop</a></v-chip>
+                                                    <v-chip color="black" outlined text-color="white" small><a id="link2" @click.prevent="scrollToSection1('')" style="margin: 0px;">Team</a></v-chip>
+                                                    <v-chip color="black" outlined text-color="white" small><a id="link2" @click.prevent="scrollToSection1('certifications')" style="margin: 0px;">Certifications</a></v-chip>
+                                                    <v-chip color="black" outlined text-color="white" small><a id="link2" @click.prevent="scrollToSection1('')" style="margin: 0px;">FAQ</a></v-chip>
+                                                    <v-chip color="black" outlined text-color="white" small><a id="link2" @click.prevent="scrollToSection1('')" style="margin: 0px;">Contact</a></v-chip>
+                                                    <v-chip color="black" outlined text-color="white" small><a id="link2" @click.prevent="scrollToSection1('')" style="margin: 0px;">terms</a></v-chip>
+                                                </v-chip-group>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="container text-start">
+                                            <h2 style="color: #89C53F; font-size: large;">Partners</h2>
+                                            <v-img :src="pt" height="100" contain width="180"></v-img>
+                                        </div>
+                                    </v-col>
                                     <v-col cols="12" md="4"></v-col>
                                 </v-row>
                             </v-col>
@@ -81,6 +103,7 @@
 </template>
 
 <script>
+import pt from "@/assets/pt.png";
 import {
     uuid
 } from "vue-uuid";
@@ -88,6 +111,7 @@ export default {
     name: "DefaultLayout",
     data() {
         return {
+            pt,
             logo: require("@/assets/logo.png"),
             clipped: false,
             drawer: false,
@@ -109,13 +133,31 @@ export default {
             title: "Charge24 Mpesa",
         };
     },
+    methods: {
+        async scrollToSection1(val) {
+            this.$router.push({
+                path: `/${val}`,
+            });
+        },
+    }
 };
 </script>
 
 <style>
-* .scrollable-element::-webkit-scrollbar {
-  display: none;
+#link2 {
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.9rem;
+    transition: 0.3s;
 }
+
+#link2:hover {
+    color: red;
+    font-weight: 800;
+    font-size: 0.9rem;
+}
+
+
 
 .parallax_footer {
     /* Background image */
@@ -126,19 +168,17 @@ export default {
     background-size: cover;
 }
 
-* {
-    font-family: "Quicksand", sans-serif;
+body{
+     font-family: "Quicksand", sans-serif;
+      overflow: unset;
 }
 
-body {
-     font-family: "Quicksand", sans-serif;
+* {
+    font-family: "Quicksand", sans-serif;
     scroll-behavior: smooth;
     overflow: hidden;
 
 }
-
-
-
 
 /* @media (max-width: 100%) {
   .section span {

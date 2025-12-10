@@ -5,9 +5,9 @@
 
             <v-card class="box1" style="padding: 0px;">
 
-                <v-row class="container">
-                    <v-col cols="12" md="6" class="">
-                        <div class=" p-8">
+                <v-row >
+                    <v-col cols="12" md="12" sm="12" class="">
+                        <div class="container">
                             <v-card-title>
                                 <h1 style="font-weight: 800; font-size: 1.7rem;"> Our Story</h1>
                             </v-card-title>
@@ -19,8 +19,8 @@
 
                         </div>
                     </v-col>
-                    <v-col cols="12" md="2" class="container">
-                        <div class=" p-8">
+                    <v-col cols="12" md="4" sm="12">
+                        <div class="">
                             <v-card-title>
                                 <h4 style="font-weight: 800;">Who We Are
                                 </h4>
@@ -39,8 +39,8 @@
 
                         </div>
                     </v-col>
-                    <v-col cols="12" md="2" class="container">
-                        <div class=" p-8">
+                    <v-col cols="12" md="4" sm="12" class="">
+                        <div class="">
                             <v-card-title>
                                 <h4 style="font-weight: 800;">What We Do
 
@@ -59,8 +59,8 @@
 
                         </div>
                     </v-col>
-                    <v-col cols="12" md="2" class="container">
-                        <div class=" p-8">
+                    <v-col cols="12" md="3" sm="12" >
+                        <div class="">
                             <v-card-title>
                                 <h4 style="font-weight: 800;">
                                     Why It Matters
@@ -359,7 +359,6 @@ export default {
     /* Background image */
     background-image: url('~/assets/about.jpg');
     background-attachment: fixed;
-    width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -370,7 +369,6 @@ export default {
     background-image: url('~/assets/vt.jpg');
     background-attachment: fixed;
     height: 30vh;
-    width: 100%;
     opacity: 0.9;
     background-position: center;
     background-repeat: no-repeat;
@@ -382,7 +380,6 @@ export default {
     background-image: url('~/assets/more.png');
     background-attachment: fixed;
     background-position: center;
-        width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -392,7 +389,6 @@ export default {
     background-image: url('~/assets/p_about.png');
     background-attachment: fixed;
     background-position: center;
-    width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
 }

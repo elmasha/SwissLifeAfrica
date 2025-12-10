@@ -15,7 +15,7 @@
                 <v-col cols="12" md="8" class="fade-in-right">
                     <div class=" container">
 
-                        <v-card color="transparent" v-show="!showBurger" height="200" elevation="0">
+                        <v-card color="transparent" v-show="!showBurger" height="90" elevation="0">
 
                         </v-card>
 
@@ -30,7 +30,7 @@
                                 From prescriptions to expert advice, we’ve got you <br>
                                 covered. Helping you and your family stay healthy,
                                 every day.</p>
-                            <v-btn rounded style="color: black;" color="white" large @click="scrollToSection('about')">Shop Now <v-icon right dark>
+                            <v-btn rounded style="color: black;" color="white" large to="/shop">Shop Now <v-icon right dark>
                                     mdi-cart
                                 </v-icon>
                             </v-btn>
@@ -41,37 +41,65 @@
                 <v-col cols="12" md="4" v-show="!showBurger">
                     <div class="">
 
-                        <v-card color="transparent" height="300" elevation="0" min-width="400">
-                            <br>
-                            <br>
-                            <br>
-                            </br>
-                            <v-card class="box">
+                        <v-card color="transparent" elevation="0" min-width="400">
 
-                                <div>
+                            <v-carousel cycle hide-delimiters :show-arrows="false">
 
-                                    <v-card-actions>
-                                        <v-card-subtitle>
-                                            <b style="font-size: 1.5rem; font-weight: 700; color: black;">Organic
-                                                <br> Kelp</b>
-                                            <br>
-                                            <p>Oragnic</p>
-                                        </v-card-subtitle>
+                                <v-carousel-item v-for="(item,i) in products" :key="i">
 
-                                        <v-chip color="green" text-color="white" small>20% OFF</v-chip>
-                                        <v-chip color="green" text-color="white" small>20% OFF</v-chip>
-                                    </v-card-actions>
-                                    <v-img :src="p1" contain height="270"></v-img>
+                                    <v-card class="box">
 
-                                </div>
-                            </v-card>
-                            <v-card>
-                                <v-card-subtitle>
-                                    NOw <br>
-                                    <b style="font-size: 1.7rem; font-weight: 700; color: black;">Ksh 1,400</b>
-                                </v-card-subtitle>
+                                        <div>
 
-                            </v-card>
+                                            <v-card-actions>
+                                                <v-card-subtitle>
+                                                    <b style="font-size: 1.8rem; font-weight: 700; color: black;"> {{ item.name }}
+                                                        <br></b>
+                                                    <br>
+
+                                                </v-card-subtitle>
+                                                <v-spacer></v-spacer>
+                                                <v-chip color="green" text-color="white" small>{{ item.category }}</v-chip>
+                                            </v-card-actions>
+                                            <v-img :src="item.image_url" contain height="270"></v-img>
+
+                                        </div>
+                                        <v-card>
+
+                                            <v-card-subtitle>
+
+                                                <v-row align="start" class="mx-0">
+                                                    <v-rating :value="4.5" color="amber" dense half-increments readonly size="14"></v-rating>
+
+                                                    <div class="grey--text ms-4">
+                                                        4.5 (413)
+                                                    </div>
+                                                </v-row><br>
+                                                <div class="d-flex">
+                                                    <div>
+                                                        NOw <br>
+                                                        <b style="font-size: 1.7rem; font-weight: 700; color: black;">Ksh {{ numeral(item.price).format("0,0") }}</b>
+
+                                                    </div>
+                                                    <v-spacer></v-spacer>
+                                                    <div>
+                                                        <v-btn text color="transparent" @click="sendData(item)">
+                                                            <div class="d-flex">
+                                                                <span style="color: black;">
+                                                                    Add<v-icon>mdi-plus</v-icon>
+                                                                </span>
+                                                            </div>
+                                                        </v-btn>
+                                                    </div>
+
+                                                </div>
+                                            </v-card-subtitle>
+                                        </v-card>
+                                    </v-card>
+
+                                </v-carousel-item>
+
+                            </v-carousel>
 
                         </v-card>
 
@@ -81,46 +109,68 @@
                 <v-col cols="12" md="4" v-show="showBurger">
                     <div class="">
 
-                        <v-card color="transparent" height="300" elevation="0" min-width="300">
-                            <div class="d-flex">
-                                <v-card class="box">
+                        <v-card color="transparent" elevation="0" min-width="300">
 
-                                    <div>
+                            <v-carousel cycle hide-delimiters :show-arrows="false">
+                                <v-carousel-item v-for="(item,i) in products" :key="i">
+                                    <div class="d-flex">
+                                        <v-card class="box" width="190">
 
-                                        <v-card-actions>
+                                            <div>
+
+                                                <v-card-actions>
+                                                    <v-card-subtitle>
+                                                        <div class="">
+                                                            <v-img :src="item.image_url" contain height="70" width="100"></v-img>
+
+                                                            <div>
+                                                                <br>
+                                                                <b style="font-size: 1.2rem; font-weight: 700; color: black;"> {{ item.name }}
+                                                                    <br></b>
+                                                                <br>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </v-card-subtitle>
+
+                                                </v-card-actions>
+
+                                            </div>
+                                        </v-card>
+                                        <v-card class="">
+
                                             <v-card-subtitle>
-                                                <div class="d-flex">
-                                                    <v-img :src="p1" contain height="60" width="60"></v-img>
+                                                <v-row align="start" class="mx-0">
+                                                    <v-rating :value="4.5" color="amber" dense half-increments readonly size="14"></v-rating>
 
-                                                    <div>
-                                                        <b style="font-size: 1.5rem; font-weight: 700; color: black;">Organic
-                                                            <br> Kelp</b>
-
-                                                        <br>
-                                                        <p>Oragnic</p>
+                                                    <div class="grey--text ms-4">
+                                                        4.5 (413)
                                                     </div>
-
+                                                </v-row> <br>
+                                                NOw <br>
+                                                <b style="font-size: 1.5rem; font-weight: 700; color: black;">Ksh {{ numeral(item.price).format("0,0") }}</b>
+                                                <br>
+                                                <v-chip-group>
+                                                    <v-chip color="green" text-color="white" small>20% OFF</v-chip>
+                                                </v-chip-group>
+                                                <div>
+                                                    <v-btn text color="transparent" @click="sendData(item)">
+                                                        <div class="d-flex">
+                                                            <span style="color: black;">
+                                                                Add<v-icon>mdi-plus</v-icon>
+                                                            </span>
+                                                        </div>
+                                                    </v-btn>
                                                 </div>
-
                                             </v-card-subtitle>
 
-                                        </v-card-actions>
-
+                                        </v-card>
                                     </div>
-                                </v-card>
-                                <v-card>
-                                    <v-card-subtitle>
-                                        NOw <br>
-                                        <b style="font-size: 1.5rem; font-weight: 700; color: black;">Ksh 1,400</b>
-                                        <br>
-                                        <v-chip-group>
-                                            <v-chip color="green" text-color="white" small>20% OFF</v-chip>
-                                            <v-chip color="green" text-color="white" small>20% OFF</v-chip>
-                                        </v-chip-group>
-                                    </v-card-subtitle>
 
-                                </v-card>
-                            </div>
+                                </v-carousel-item>
+
+                            </v-carousel>
 
                         </v-card>
 
@@ -136,6 +186,8 @@
 <script>
 import p1 from "@/assets/product/p1.png";
 import bg from "@/assets/carousel/2.jpg";
+import axios from "axios";
+import numeral from "numeral";
 
 export default {
     name: 'NuxtTutorial',
@@ -147,12 +199,55 @@ export default {
     },
     data() {
         return {
+            products: [],
+            numeral,
+            items_c: [{
+                    src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+                },
+                {
+                    src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+                },
+                {
+                    src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+                },
+                {
+                    src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
+                },
+            ],
             p1,
             bg,
             pageNotFound: '404 Not Found',
             otherError: 'An error occurred'
         }
     },
+    methods: {
+        sendData(val) {
+            this.$emit("send-data", val);
+        },
+        async Fetch_Products() {
+            let that = this;
+            that.products.splice(that.products);
+            axios
+                .get("https://swisslifeserver-production.up.railway.app/api/products/products/tag/home", {})
+                .then(function (response) {
+                    if (response.status == 200) {
+                        // that.snackbar = true;
+                        // that.snackbarText = response.data;
+                        that.products = response.data;
+                        console.log("products", that.products);
+                    } else if (response.status == 400) {
+
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+
+                });
+        },
+    },
+    mounted() {
+        this.Fetch_Products();
+    }
 }
 </script>
 

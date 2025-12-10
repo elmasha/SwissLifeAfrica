@@ -3,58 +3,64 @@
     <div>
         <v-app-bar light elevation="0" class="" color="white" fixed>
 
-                    <v-menu offset-y>
-                        <template v-slot:activator="{ on, attrs }">
+            <v-menu offset-y>
+                <template v-slot:activator="{ on, attrs }">
 
-                            <v-app-bar-nav-icon v-show="showBurger" light v-bind="attrs" v-on="on" color="black"></v-app-bar-nav-icon>
-                        </template>
-                        <v-list>
-                            <!-- <v-list-item v-for="(item, index) in items" :key="item.title">
+                    <v-app-bar-nav-icon v-show="showBurger" light v-bind="attrs" v-on="on" color="black"></v-app-bar-nav-icon>
+                </template>
+                <v-list>
+                    <!-- <v-list-item v-for="(item, index) in items" :key="item.title">
                                 <v-list-item-action @click="checkNav(item.title)">{{ item.title }}</v-list-item-action>
                                 <v-list-item-title></v-list-item-title>
                             </v-list-item> -->
 
-                            <v-list-item> <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">Home</a></v-list-item>
-                            <v-list-item><a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">About</a></v-list-item>
-                            <v-list-item><a id="link" @click.prevent="scrollToSection1('shop')" style="margin: 8px;">Shop</a></v-list-item>
-                            <v-list-item> <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">Team</a></v-list-item>
-                            <v-list-item> <a id="link" @click.prevent="scrollToSection1('certifications')" style="margin: 8px;">Certifications</a></v-list-item>
-                            <v-list-item> <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">FAQ</a></v-list-item>
-                            <v-list-item> <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">Contact</a></v-list-item>
-                            <v-list-item><a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">terms</a></v-list-item>
+                    <v-list-item> <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">Home</a></v-list-item>
+                    <v-list-item><a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">About</a></v-list-item>
+                    <v-list-item><a id="link" @click.prevent="scrollToSection1('shop')" style="margin: 8px;">Shop</a></v-list-item>
+                    <v-list-item> <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">Team</a></v-list-item>
+                    <v-list-item> <a id="link" @click.prevent="scrollToSection1('certifications')" style="margin: 8px;">Certifications</a></v-list-item>
+                    <v-list-item> <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">FAQ</a></v-list-item>
+                    <v-list-item> <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">Contact</a></v-list-item>
+                    <v-list-item><a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">terms</a></v-list-item>
 
-                        </v-list>
-                    </v-menu>
+                </v-list>
+            </v-menu>
 
-                    <v-toolbar-title>
-                        <v-img :src="logo" contain width="120" height="30"></v-img>
-                    </v-toolbar-title>
+            <v-toolbar-title>
+                <v-img :src="logo" contain width="120" height="30"></v-img>
+            </v-toolbar-title>
 
-                    <v-spacer></v-spacer>
-                    <div v-show="!showBurger" id="nav_bar_links">
-                        <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">Home</a>
-                        <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">About</a>
-                        <a id="link" @click.prevent="scrollToSection1('shop')" style="margin: 8px;">Shop</a>
-                        <a id="link" @click.prevent="scrollToSection('')" style="margin: 8px;">Team</a>
-                        <a id="link" @click.prevent="scrollToSection1('certifications')" style="margin: 8px;">Certifications</a>
-                        <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">FAQ</a>
-                        <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">Contact</a>
-                        <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">terms</a>
-                    </div>
-                    <v-spacer></v-spacer>
+            <v-spacer></v-spacer>
+            <div v-show="!showBurger" id="nav_bar_links">
+                <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">Home</a>
+                <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">About</a>
+                <a id="link" @click.prevent="scrollToSection1('shop')" style="margin: 8px;">Shop</a>
+                <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">Team</a>
+                <a id="link" @click.prevent="scrollToSection1('certifications')" style="margin: 8px;">Certifications</a>
+                <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">FAQ</a>
+                <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">Contact</a>
+                <a id="link" @click.prevent="scrollToSection1('')" style="margin: 8px;">terms</a>
+            </div>
+            <v-spacer></v-spacer>
 
-                    <v-btn icon>
-                        <v-icon>mdi-account</v-icon>
-                    </v-btn>
+            <v-btn icon>
+                <v-icon>mdi-account</v-icon>
+            </v-btn>
 
-                    <div class="cart-container d-flex align-center">
-                        <v-btn icon class="cart-btn" color="primary" @click="drawer2 = !drawer2">
-                            <v-icon medium>mdi-cart-outline</v-icon>
-                            <v-badge v-if="totalItems > 0" :content="totalItems" style="margin-top: 10px; margin-right: 10px;" color="red" overlap bordered class="cart-badge"></v-badge>
-                        </v-btn>
-                    </div>
+            <div class="cart-container d-flex align-center">
+                <v-btn icon class="cart-btn" color="primary" @click="drawer2 = !drawer2">
+                    <v-icon medium>mdi-cart-outline</v-icon>
+                    <span style="background-color: red; color: white; border-radius: 360px;padding: 3px; font-size: 0.7rem; font-weight: 1000;">{{ totalItems}}</span>
 
-                </v-app-bar>
+                    <!-- <v-badge v-if="totalItems > 0" :content="totalItems" style="margin-right: 30px;margin-top: 10px; width: 100%;" color="red" overlap bordered class="cart-badge">{{ totalItems}}</v-badge> -->
+                </v-btn>
+            </div>
+
+            <v-btn icon @click="$fire.auth.signOut()" v-if="show_auth">
+                <v-icon>mdi-logout</v-icon>
+            </v-btn>
+
+        </v-app-bar>
         <v-navigation-drawer v-model="drawer" absolute right style="margin-top: 120px;" elevation="0">
         </v-navigation-drawer>
     </div>

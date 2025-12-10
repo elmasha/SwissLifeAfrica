@@ -6,7 +6,7 @@
 
         <div class="container">
             <v-row class="text-center">
-                <v-col cols="6" md="4" class="">
+                <v-col cols="6" md="6" class="">
                     <v-card elevation="0" color="transparent">
                         <v-img :src="t4" contain height="150"></v-img>
                         <v-card-subtitle>
@@ -20,7 +20,7 @@
                     </v-card>
 
                 </v-col>
-                <v-col cols="6" md="4" class="">
+                <v-col cols="6" md="6" class="">
                     <v-card elevation="0" color="transparent">
                         <v-img :src="t7" contain height="150"></v-img>
                         <v-card-subtitle>
@@ -35,7 +35,7 @@
                     </v-card>
 
                 </v-col>
-                <v-col cols="6" md="4" class="">
+                <v-col cols="6" md="6" class="">
                     <v-card elevation="0" color="transparent">
                         <v-img :src="t1" contain height="150"></v-img>
                         <v-card-subtitle>
@@ -49,7 +49,7 @@
                     </v-card>
 
                 </v-col>
-                <v-col cols="6" md="4" class="">
+                <v-col cols="6" md="6" class="">
                     <v-card elevation="0" color="transparent">
                         <v-img :src="t5" contain height="150"></v-img>
                         <v-card-subtitle>
@@ -64,7 +64,7 @@
                     </v-card>
 
                 </v-col>
-                <v-col cols="6" md="4" class="">
+                <v-col cols="6" md="6" class="">
                     <v-card elevation="0" color="transparent">
                         <v-img :src="t2" contain height="150"></v-img>
                         <v-card-subtitle>
@@ -79,7 +79,7 @@
                     </v-card>
 
                 </v-col>
-                <v-col cols="6" md="4" class="">
+                <v-col cols="6" md="6" class="">
                     <v-card elevation="0" color="transparent">
                         <v-img :src="t3" contain height="150"></v-img>
                         <v-card-subtitle>
@@ -162,7 +162,6 @@ export default {
     /* Background image */
     background-image: url('~/assets/p_about.png');
     background-attachment: fixed;
-    width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

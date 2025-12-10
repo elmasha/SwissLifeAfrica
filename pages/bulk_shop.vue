@@ -64,83 +64,101 @@
         </v-navigation-drawer>
     </div>
     <v-card color="white" elevation="0" style="margin-top: 40px;">
-        <v-row  v-resize="onResize">
+        <v-row v-resize="onResize">
 
             <v-col cols="12" sm="12" md="12"> </v-col>
 
             <v-col cols="12" sm="12" md="12">
 
-                <div class="container my-0">
+                <div class="container">
                     <div class="d-flex">
                         <div>
 
-                            <h1 style="font-size: 1.9rem;">Shop</h1>
+                            <h1 style="font-size: 1.9rem;">Orders</h1>
 
-                            <label for="">Categories</label>
+                            <label for="">Status</label>
                             <v-chip-group column>
                                 <v-chip color="black" text-color="white" small @click="Fetch_Products">All</v-chip>
-                                <v-chip color="black" text-color="white" small @click="search_with_categories('Energy')">Energy</v-chip>
-                                <v-chip color="black" outlined text-color="black" @click="search_with_categories('anti-aging')" small>anti-aging</v-chip>
-                                <v-chip color="black" outlined text-color="black" @click="search_with_categories('Bones')" small>Bones</v-chip>
-                                <v-chip color="black" outlined text-color="black" @click="search_with_categories('Omega 3')" small>Omega 3</v-chip>
+                                <v-chip color="black" text-color="white" small @click="search_with_categories('Energy')">Pending</v-chip>
+                                <v-chip color="black" outlined text-color="black" @click="search_with_categories('anti-aging')" small>Cancled</v-chip>
                             </v-chip-group>
                         </div>
                         <v-spacer></v-spacer>
-                        <div class="my-8">
-                            <div>
-                                <div class="text-right">
-                                    <span style="font-size: 0.8rem; margin:9px;"> B2B bulk purchase</span> <br> 
-                                    <!-- :to="`b2b/${'JIWE18KXjOfWuDe2yweDrTPrFNm1'}`  -->
-                                    <v-btn large outlined rounded @click="checkBusiness()">
-                                        B2B / Bulk
-                                        <v-icon right dark>
-                                            mdi-truck-fast-outline
-                                        </v-icon>
-                                    </v-btn>
-
-                                </div>
-                            </div>
-
-                        </div>
+                      
                     </div>
-                    <div class="">
-                        <v-row>
-                            <v-col cols="12" sm="6" md="4">
-                                <v-text-field @change="Search_Products(searchProduct)" v-model="searchProduct" placeholder="Search products" prepend-inner-icon="mdi-magnify" clearable filled rounded dense></v-text-field>
-                            </v-col>
-                        </v-row>
+                    
+                 
 
-                    </div>
-                    <v-card id="all_items4" elevation="0">
-                        <div class="container  text-start">
-                            <div class="row">
+                </div>
+            </v-col>
+            <v-col cols="12" sm="6" md="6"> 
+                <div class="container" style="padding:0px; background-color: aliceblue;border-radius: 12px solid ;">
+                       <v-card  elevation="0">
+                        <div class="container" id="all_items3">
+                            <div class="row" >
 
-                                <div v-for="(product, id) in products" :key="id" class="col-md-2">
+                                <div v-for="(order, id) in orders" :key="id" class="col-md-12">
 
-                                    <v-card elevation="0">
-                                        <v-img :src="product.image_url" contain height="150"></v-img>
-                                        <v-card-subtitle>
-                                            <b style="font-size: 1.1rem; font-weight: 700; color: black;"> {{ product.name }}
-                                            </b>
-                                        </v-card-subtitle>
-                                        <v-row align="center" class="mx-6">
-                                            <v-rating :value="4.5" color="amber" dense half-increments readonly size="14"></v-rating>
+                                    <v-card class="mx-auto" max-width="800" outlined>
+                                        <!-- <v-img src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" height="200px"></v-img> -->
 
-                                            <div class="grey--text ms-4">
-                                                4.5 (413)
+                                        <div class="d-flex">
+                                            <div>
+                                                <v-card-title>
+                                                    <h4>Order ID:#{{ order.id }}</h4>
+                                                </v-card-title>
+
+                                                <v-card-subtitle>
+                                                  <div>
+                                                      fulfillment status <b>{{ order.fulfillment_status }}</b>
+                                                  </div>
+                                                  <div>
+                                                     <h4 style="font-size: 1.0rem; padding: 6px;"> Total Ksh <b>{{ numeral(order.total_amount).format("0,0.0") }}</b></h4>
+                                                  </div>
+                                                </v-card-subtitle>
                                             </div>
-                                        </v-row>
-                                        <v-card-text>
-                                            Now
-                                            <br>
-                                            <b style="font-size: 1.2rem; font-weight: 700; color: black;">Ksh {{ numeral( product.price).format("0,0") }}</b>
-                                        </v-card-text>
-                                        <v-card-actions>
+                                            <v-spacer></v-spacer>
+                                            <div class="text-left">
+                                                <v-card-subtitle>
+                                                    <h4> Status <b>{{ order.status }}</b> </h4>
+                                                </v-card-subtitle>
 
-                                            <v-btn rounded color="black" style="color: aliceblue;" small @click="add_Cart = true,quantity=1,cartProduct = product">Add to cart <v-icon>mdi-cart</v-icon>
-                                            </v-btn>
+                                                <v-card-subtitle>
+                                                    <h4> Paymnent method <b>{{ order.payment_method }}</b> </h4>
+                                                </v-card-subtitle>
+                                            </div>
+                                        </div>
 
-                                        </v-card-actions>
+                                        <v-expand-transition>
+                                            <div>
+                                                <v-divider></v-divider>
+
+                                                <v-card-text>
+                                                    <div class="row" >
+                                                        <div v-for="nom in order.items" :key="nom.product_id">
+                                                            <div class="nominee-header" >
+                                                                <div class="container">
+                                                                    <div class="d-flex">
+                                                                        <div>
+                                                                            <v-img :src="nom.image_url" contain height="50" width="50"></v-img>
+                                                                        </div>
+                                                                        <div>
+                                                                            Qty {{ nom.quantity }}
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <h5> <strong>{{ nom.name }}</strong></h5>
+                                                                    <p style="margin: 3px;">Ksh   <b>{{numeral( nom.price).format("0,0.0")}}</b>  </p>
+                                                                </div>
+                                                            </div>
+                                                            <br>
+
+                                                        </div>
+
+                                                    </div>
+                                                </v-card-text>
+                                            </div>
+                                        </v-expand-transition>
                                     </v-card>
 
                                 </div>
@@ -148,76 +166,18 @@
                         </div>
 
                     </v-card>
-
                 </div>
             </v-col>
-            <v-col cols="12" sm="12" md="12"> </v-col>
+            <v-col cols="12" sm="6" md="6">
+                <div class="container">
+                    <div class="container">
+                        <v-img :src="ord" contain height="400" ></v-img>
+                    </div>
+                </div>
+            </v-col>
         </v-row>
         <div>
-            <v-bottom-sheet v-model="drawer2" inset>
-
-                <v-sheet class="text-sart" height="700px">
-                    <v-progress-linear color="#89C53F" indeterminate v-show="showProgressCart" rounded height="6"></v-progress-linear>
-                    <v-card elevation="0">
-                        <div class="d-flex">
-                            <v-card-title><b>Cart List</b></v-card-title>
-                            <v-spacer></v-spacer>
-                            <v-btn style="margin: 12px;" icon @click="drawer2 = false">
-                                <v-icon color="red">mdi-close</v-icon>
-                            </v-btn>
-                        </div>
-                        <v-divider></v-divider>
-                        <div class="container">
-                            <div class="">
-
-                                <v-list-item-content>
-                                    <v-list-item-subtitle>
-                                        <p>{{ totalItems }} items</p>
-                                    </v-list-item-subtitle>
-                                    <p>For</p>
-                                    <v-list-item-title>
-                                        <h3>Ksh/=<b> {{ numeral(total_price).format("0,0.0")  }}</b></h3>
-                                    </v-list-item-title>
-
-                                </v-list-item-content>
-
-                                <div>
-
-                                    <v-btn rounded color="green" :to="`checkout/${UID}`" style="color: white;">Check Out</v-btn>
-                                    <v-btn text color="red" @click="clearCart">Clear cart</v-btn>
-                                </div>
-                            </div>
-
-                        </div>
-                        <v-list>
-
-                        </v-list>
-
-                        <div class="row" id="all_items4">
-                            <div v-for="(item, id) in cart_items" :key="id" class="col-md-3">
-                                <v-list-item>
-                                    <v-list-item-icon>
-                                        <div class="d-flex">
-                                            <v-btn icon small @click="removeFromCart(item)">
-                                                <v-icon color="red">mdi-close-circle</v-icon>
-                                            </v-btn>
-                                            <v-img height="50" contain width="50" :src=" item.image_url"></v-img>
-                                        </div>
-                                    </v-list-item-icon>
-
-                                    <v-list-item-content>
-                                        <v-list-item-title>{{ item.name }}</v-list-item-title>
-                                        <br>
-                                        <v-list-item-subtitle>Qty: {{ item.quantity }} | Ksh {{ item.price }}</v-list-item-subtitle>
-                                    </v-list-item-content>
-                                </v-list-item>
-                            </div>
-                        </div>
-
-                    </v-card>
-
-                </v-sheet>
-            </v-bottom-sheet>
+          
         </div>
         <v-snackbar color="primary accent-8" :timeout="6000" v-model="snackbar_s" centered bottom>
             {{ snackbarText_s }}
@@ -272,13 +232,7 @@
         </v-dialog>
 
         <v-dialog v-model="BsAuth" elevation="0" class="text-center auth" light :scrollable="false" max-width="1200">
-            <v-card elevation="0">
-                <v-btn icon @click="BsAuth = false" style="position: absolute; right: 10px; top: 10px; z-index: 1000;">
-                    <v-icon color="red">mdi-close</v-icon>
-                </v-btn>
-                 <business-auth></business-auth>
-            </v-card>
-           
+            <business-auth></business-auth>
         </v-dialog>
 
     </v-card>
@@ -290,6 +244,7 @@ import axios from "axios";
 import moment from "moment";
 import numeral from "numeral";
 import logo from "@/assets/logo.png";
+import ord from "@/assets/ord.svg";
 import BusinessAuth from "../components/BusinessAuth.vue"
 
 import {
@@ -306,6 +261,7 @@ export default {
     },
     data() {
         return {
+            ord,
             scrollInvoked: 0,
             BsAuth: false,
             showProgressCart: false,
@@ -327,7 +283,7 @@ export default {
             product_id: null,
             quantity: 1,
             price: null,
-            products: [],
+            orders: [],
             totalItems: 0,
             cart_items: [],
             total_items: 0,
@@ -347,9 +303,9 @@ export default {
             status: false,
             drawer2: false,
             drawer: false,
+            show_auth: false,
             logo,
             exists: false,
-            show_auth: false,
             cart_tag: "reatail",
             UID: "",
         };
@@ -389,8 +345,8 @@ export default {
                 this.UID = this.$fire.auth.currentUser.uid;
                 this.show_auth = true;
             } else {
-                this.UID = "elmasha";
                 this.show_auth = false;
+                this.UID = "elmasha";
                 console.log(this.UID);
             }
         },
@@ -430,7 +386,7 @@ export default {
                     quantity: this.quantity,
                     price: product.price,
                 });
-                that.Fetch_CartList();
+                that.Fetch_Orders();
                 that.add_Cart = false;
                 that.snackbar = true;
                 that.snackbarText = "✅ Item added to cart!";
@@ -449,7 +405,7 @@ export default {
                     product_id: item.product_id, // 👈 This will now appear in req.body                 
                 });
 
-                that.Fetch_CartList();
+                that.Fetch_Orders();
                 that.snackbar = true;
                 that.snackbarText = "✅ Item removed from cart!";
                 that.showProgressCart = false;
@@ -466,7 +422,7 @@ export default {
                 const res = await axios.post("https://swisslifeserver-production.up.railway.app/api/cart/clear/", {
                     uid: this.cart_tag + "_" + this.UID, // 👈 Data must go inside `data`
                 });
-                this.Fetch_CartList();
+                this.Fetch_Orders();
                 this.snackbar = true;
                 this.snackbarText = "✅Cart cleard!";
                 this.showProgressCart = false;
@@ -486,7 +442,6 @@ export default {
                     if (response.status == 200) {
                         // that.snackbar = true;
                         // that.snackbarText = response.data;
-                        that.products = response.data;
                     } else if (response.status == 400) {
                         that.snackbar2 = true;
                         that.snackbarText2 = response.data;
@@ -560,19 +515,17 @@ export default {
                     that.snackbar2 = true;
                 });
         },
-        async Fetch_CartList() {
+        async Fetch_Orders() {
             let that = this;
-            that.cart_items.splice(0, that.cart_items.length);
+            that.orders.splice(0, that.orders.length);
             axios
-                .get("https://swisslifeserver-production.up.railway.app/api/cart/total/" + that.cart_tag + "_" + that.UID, {})
+                .get("https://swisslifeserver-production.up.railway.app/api/orders/user/" + that.UID, {})
                 .then(function (response) {
                     if (response.status == 200) {
                         // that.snackbar = true;
                         // that.snackbarText = response.data;
-                        that.cart_items = response.data.items;
-                        that.totalItems = response.data.totalItems;
-                        that.total_price = response.data.totalAmount;
-                        console.log("Cart", that.totalItems);
+                        that.orders = response.data;
+                        console.log("Order", response.data);
 
                     } else if (response.status == 400) {
                         that.snackbar2 = true;
@@ -620,8 +573,7 @@ export default {
     },
     mounted() {
         this.checkUser();
-        this.Fetch_Products();
-        this.Fetch_CartList();
+        this.Fetch_Orders();
         // window.addEventListener('scroll', this.handleScroll);
     },
     created() {},
@@ -689,9 +641,9 @@ export default {
 </script>
 
 <style>
-#all_items4 {
-    --scrollbarBG: #ffffff00;
-    --thumbBG: #ffffff00;
+#all_items3 {
+    --scrollbarBG: #00000000;
+    --thumbBG: #2f2c2c00;
     scrollbar-width: thin;
     scrollbar-color: var(--thumbBG) var(--scrollbarBG);
     overflow-x: auto;
@@ -699,18 +651,18 @@ export default {
     align-items: start;
     bottom: 0;
     padding: 3px;
-    max-height: 1000px;
+    height: 900px;
 }
 
-#all_items4::-webkit-scrollbar {
+#all_items3::-webkit-scrollbar {
     width: 2px;
 }
 
-#all_items4::-webkit-scrollbar-track {
+#all_items3::-webkit-scrollbar-track {
     background: var(--scrollbarBG);
 }
 
-#all_items4::-webkit-scrollbar-thumb {
+#all_items3::-webkit-scrollbar-thumb {
     background-color: var(--thumbBG);
     border-radius: 8px;
     border: 3px solid var(--scrollbarBG);
@@ -788,7 +740,7 @@ export default {
     font-weight: 800;
 }
 
-#all_items4 {
+#all_items2 {
     --scrollbarBG: #000;
     --thumbBG: #2f2c2ce0;
     scrollbar-width: thin;
@@ -801,15 +753,15 @@ export default {
     height: 700px;
 }
 
-#all_items4::-webkit-scrollbar {
+#all_items2::-webkit-scrollbar {
     width: 8px;
 }
 
-#all_items4::-webkit-scrollbar-track {
+#all_items2::-webkit-scrollbar-track {
     background: var(--scrollbarBG);
 }
 
-#all_items4::-webkit-scrollbar-thumb {
+#all_items2::-webkit-scrollbar-thumb {
     background-color: var(--thumbBG);
     border-radius: 8px;
     border: 3px solid var(--scrollbarBG);
