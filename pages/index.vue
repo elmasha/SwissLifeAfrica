@@ -254,9 +254,12 @@
         </v-row>
 
         <v-col cols="12" class="justify-center">
-            <v-btn color="green" dark fab large @click="scrollToSection('home')" style="position: fixed; bottom: 30px; right: 30px;">
+            <a href="https://wa.link/vor57j" style="text-decoration: none;">
+                 <v-btn color="green" dark fab large  style="position: fixed; bottom: 30px; right: 30px;">
                 <v-icon>mdi-whatsapp</v-icon>
             </v-btn>
+            </a>
+           
         </v-col>
         <v-col cols="12" class="justify-center">
             <v-btn v-show="backToTop" color="green" dark fab large @click="scrollToSection('home')" style="position: fixed; bottom: 30px; right: 30px;">
