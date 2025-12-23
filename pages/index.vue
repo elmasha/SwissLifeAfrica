@@ -29,7 +29,9 @@
                     </v-menu>
 
                     <v-toolbar-title>
-                      <nuxt-link style="text-decoration: none;" to="/"><v-img :src="logo" contain width="120" height="30"></v-img></nuxt-link>   
+                        <nuxt-link style="text-decoration: none;" to="/">
+                            <v-img :src="logo" contain width="120" height="30"></v-img>
+                        </nuxt-link>
                     </v-toolbar-title>
 
                     <v-spacer></v-spacer>
@@ -57,9 +59,9 @@
                             <!-- <v-badge v-if="totalItems > 0" :content="totalItems" style="margin-right: 30px;margin-top: 10px; width: 100%;" color="red" overlap bordered class="cart-badge">{{ totalItems}}</v-badge> -->
                         </v-btn>
                     </div>
-                    <v-btn icon @click="$fire.auth.signOut()" v-if="show_auth">
+                    <!-- <v-btn icon @click="$fire.auth.signOut()" v-if="show_auth">
                         <v-icon>mdi-logout</v-icon>
-                    </v-btn>
+                    </v-btn> -->
 
                 </v-app-bar>
 
@@ -83,7 +85,7 @@
                             </v-btn>
                         </div>
                     </div> -->
-                    <v-expand-transition >
+                    <v-expand-transition>
                         <v-card color="#eefcdd" elevation="0" class="pa-2 mb-4" v-show="OrderTag" style="position: fixed; top: 80px; left: 20px; z-index: 1000; width: auto; max-width: 300px;">
                             <div class="d-flex">
                                 <div>
@@ -129,10 +131,10 @@
                 <section id="shop" class=" ">
                     <div class="container my-0 ">
                         <div class="d-flex">
-                            <div class="container">
+                            <div>
 
-                                <h1>Best Sellers</h1>
-                                <label for="">Best selling categories</label>
+                                <h1 class="container">Best Sellers</h1>
+                                <label class="container" for="">Best selling categories</label>
                                 <v-chip-group column>
                                     <!-- <v-chip color="black" text-color="white" small>20% OFF</v-chip>
                                     <v-chip color="black" outlined text-color="black" small>20% OFF</v-chip>
@@ -157,32 +159,35 @@
                             </v-alert>
                             <v-spacer></v-spacer>
                         </div>
-                        <v-card elevation="0" >
-                            <div style="overflow-x: auto; white-space: nowrap; padding-bottom: 10px;">
-                                <div style="display: flex; gap: 16px;">
+                        <v-card elevation="0">
+                            <div>
+                                <div class="products-wrapper">
 
                                     <div v-for="(product, id) in products" :key="id" class="col-md-3" style="flex: 0 0 auto; width: 250px;">
 
                                         <v-card elevation="0" color="transparent">
-                                            <v-img :src="product.image_url" contain height="150"></v-img>
+                                            <div class="d-flex">
+                                                <v-img :src="product.image_url" contain height="150"></v-img>
+                                                <v-spacer></v-spacer>
+                                            </div>
 
-                                            <v-card-subtitle>
+                                            <v-card-subtitle class="text-center">
                                                 <b style="font-size: 1.1rem; font-weight: 700; color: black;">{{ product.name }}</b>
                                             </v-card-subtitle>
 
-                                            <v-row align="center" class="mx-6">
-                                                <v-rating :value="4.5" color="amber" dense half-increments readonly size="14"></v-rating>
-                                                <div class="grey--text ms-4">4.5 </div>
-                                            </v-row>
+                                        
 
-                                            <v-card-text>
+                                            <v-card-text class="text-center">
+                                                <v-rating :value="product.rating" color="amber" dense half-increments readonly size="14"></v-rating>
+                                                <div class="grey--text ms-4">{{ product.rating }}</div>
                                                 <br> Now <br>
                                                 <b style="font-size: 1.2rem; font-weight: 700; color: black;">
                                                     Ksh {{ numeral(product.price).format("0,0.0") }}
                                                 </b>
                                             </v-card-text>
 
-                                            <v-card-actions>
+                                            <v-card-actions class="text-center">
+                                                   <v-spacer></v-spacer>
                                                 <v-btn rounded color="black" style="color: aliceblue;" small @click="add_Cart = true, quantity = 1, cartProduct = product">
                                                     Add to cart <v-icon>mdi-cart</v-icon>
                                                 </v-btn>
@@ -255,11 +260,11 @@
 
         <v-col cols="12" class="justify-center">
             <a href="https://wa.link/vor57j" style="text-decoration: none;">
-                 <v-btn color="green" dark fab large  style="position: fixed; bottom: 30px; right: 30px;">
-                <v-icon>mdi-whatsapp</v-icon>
-            </v-btn>
+                <v-btn color="green" dark fab large style="position: fixed; bottom: 30px; right: 30px;">
+                    <v-icon>mdi-whatsapp</v-icon>
+                </v-btn>
             </a>
-           
+
         </v-col>
         <v-col cols="12" class="justify-center">
             <v-btn v-show="backToTop" color="green" dark fab large @click="scrollToSection('home')" style="position: fixed; bottom: 30px; right: 30px;">
@@ -640,6 +645,7 @@ export default {
                 });
                 this.Fetch_CartList();
                 this.add_Cart = false;
+
                 this.snackbar = true;
                 this.snackbarText = "✅ Item added to cart!";
                 console.log(res.data);
@@ -657,6 +663,7 @@ export default {
 
                 this.Fetch_CartList();
                 this.snackbar = true;
+                this.drawer2 = false;
                 this.snackbarText = "✅ Item removed from cart!";
                 console.log(res.data);
             } catch (err) {
@@ -671,6 +678,7 @@ export default {
                 });
                 this.Fetch_CartList();
                 this.snackbar = true;
+                this.drawer2 = false;
                 this.snackbarText = "✅ Cart cleard!";
             } catch (err) {
                 console.error("❌ Remove failed:", err);
@@ -771,6 +779,30 @@ export default {
 </script>
 
 <style scoped>
+.products-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    /* prevent wrapping */
+    overflow-x: auto;
+    /* ONLY horizontal scroll */
+    overflow-y: hidden;
+    gap: 16px;
+    padding: 8px 0;
+}
+
+.product-card {
+    flex: 0 0 auto;
+    /* prevents shrinking */
+    width: 250px;
+}
+
+/* Mobile adjustment */
+@media (max-width: 600px) {
+    .product-card {
+        width: 200px;
+    }
+}
+
 .parallax_about {
     /* Background image */
     background-image: url('~/assets/p_about.png');

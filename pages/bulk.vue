@@ -55,9 +55,9 @@
                     <!-- <v-badge v-if="totalItems > 0" :content="totalItems" style="margin-right: 30px;margin-top: 10px; width: 100%;" color="red" overlap bordered class="cart-badge">{{ totalItems}}</v-badge> -->
                 </v-btn>
             </div>
-            <v-btn icon @click="$fire.auth.signOut()" v-if="show_auth">
+            <!-- <v-btn icon @click="$fire.auth.signOut()" v-if="show_auth">
                 <v-icon>mdi-logout</v-icon>
-            </v-btn>
+            </v-btn> -->
 
         </v-app-bar>
         <v-navigation-drawer v-model="drawer" absolute right style="margin-top: 120px;" elevation="0">

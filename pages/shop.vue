@@ -27,7 +27,9 @@
             </v-menu>
 
             <v-toolbar-title>
-                  <nuxt-link style="text-decoration: none;" to="/"><v-img :src="logo" contain width="120" height="30"></v-img></nuxt-link>  
+                <nuxt-link style="text-decoration: none;" to="/">
+                    <v-img :src="logo" contain width="120" height="30"></v-img>
+                </nuxt-link>
             </v-toolbar-title>
 
             <v-spacer></v-spacer>
@@ -55,9 +57,9 @@
                     <!-- <v-badge v-if="totalItems > 0" :content="totalItems" style="margin-right: 30px;margin-top: 10px; width: 100%;" color="red" overlap bordered class="cart-badge">{{ totalItems}}</v-badge> -->
                 </v-btn>
             </div>
-            <v-btn icon @click="$fire.auth.signOut()" v-if="show_auth">
+            <!-- <v-btn icon @click="$fire.auth.signOut()" v-if="show_auth">
                 <v-icon>mdi-logout</v-icon>
-            </v-btn>
+            </v-btn> -->
 
         </v-app-bar>
         <v-navigation-drawer v-model="drawer" absolute right style="margin-top: 120px;" elevation="0">
@@ -70,78 +72,81 @@
 
             <v-col cols="12" sm="12" md="12">
 
-                <div class="container my-0">
+                <div class=" pa-4">
                     <div class="d-flex">
                         <div>
 
                             <h1 style="font-size: 1.9rem;">Shop</h1>
 
-                            <label for="">Categories</label>
-                            <v-chip-group column>
-                                <v-chip color="black" text-color="white" small @click="Fetch_Products">All</v-chip>
-                                <v-chip color="black" text-color="white" small @click="search_with_categories('Energy')">Energy</v-chip>
-                                <v-chip color="black" outlined text-color="black" @click="search_with_categories('anti-aging')" small>anti-aging</v-chip>
-                                <v-chip color="black" outlined text-color="black" @click="search_with_categories('Bones')" small>Bones</v-chip>
-                                <v-chip color="black" outlined text-color="black" @click="search_with_categories('Omega 3')" small>Omega 3</v-chip>
-                            </v-chip-group>
                         </div>
                         <v-spacer></v-spacer>
-                        <div class="my-8">
-                            <div>
-                                <div class="text-right">
-                                    <span style="font-size: 0.8rem; margin:9px;"> B2B bulk purchase</span> <br>
-                                    <!-- :to="`b2b/${'JIWE18KXjOfWuDe2yweDrTPrFNm1'}`  -->
-                                    <v-btn large outlined rounded @click="checkBusiness()">
-                                        B2B / Bulk
-                                        <v-icon right dark>
-                                            mdi-truck-fast-outline
-                                        </v-icon>
-                                    </v-btn>
 
-                                </div>
-                            </div>
+                        <div class="text-center">
+                            <span style="font-size: 0.8rem; margin:9px;font-weight: 900;"> B2B bulk purchase</span> <br>
+                            <!-- :to="`b2b/${'JIWE18KXjOfWuDe2yweDrTPrFNm1'}`  -->
+                            <v-btn large outlined rounded @click="checkBusiness()">
+                                B2B/Bulk
+                                <v-icon right dark>
+                                    mdi-truck-fast-outline
+                                </v-icon>
+                            </v-btn>
 
                         </div>
+
                     </div>
                     <div class="">
                         <v-row>
                             <v-col cols="12" sm="6" md="4">
+                                <div class=" pa-4">
+                                    <label for="">Categories</label>
+                                    <v-chip-group column>
+                                        <v-chip color="black" text-color="white" small @click="Fetch_Products">All</v-chip>
+                                        <v-chip color="black" text-color="white" small @click="search_with_categories('Energy')">Energy</v-chip>
+                                        <v-chip color="black" outlined text-color="black" @click="search_with_categories('anti-aging')" small>anti-aging</v-chip>
+                                        <v-chip color="black" outlined text-color="black" @click="search_with_categories('Bones')" small>Bones</v-chip>
+                                        <v-chip color="black" outlined text-color="black" @click="search_with_categories('Omega 3')" small>Omega 3</v-chip>
+                                    </v-chip-group>
+                                </div>
                                 <v-text-field @change="Search_Products(searchProduct)" v-model="searchProduct" placeholder="Search products" prepend-inner-icon="mdi-magnify" clearable filled rounded dense></v-text-field>
                             </v-col>
                         </v-row>
 
                     </div>
-                    <v-card id="all_items4" elevation="0">
-                        <div class="container  text-start">
+                    <v-card  elevation="0" class="">
+                        <div class="container  text-start shop-products">
                             <div class="row">
 
-                                <div v-for="(product, id) in products" :key="id" class="col-md-2">
+                                <div v-for="(product, id) in products" :key="id" class="col-md-2 shop-product">
 
-                                    <v-card elevation="0">
-                                        <v-img :src="product.image_url" contain height="150"></v-img>
-                                        <v-card-subtitle>
-                                            <b style="font-size: 1.1rem; font-weight: 700; color: black;"> {{ product.name }}
-                                            </b>
-                                        </v-card-subtitle>
-                                        <v-row align="center" class="mx-6">
-                                            <v-rating :value="4.5" color="amber" dense half-increments readonly size="14"></v-rating>
-
-                                            <div class="grey--text ms-4">
-                                                4.5
+                                  <v-card elevation="0" color="transparent" outlined>
+                                            <div class="d-flex">
+                                                  <v-spacer></v-spacer>
+                                                <v-img :src="product.image_url" contain height="150"></v-img>
+                                                <v-spacer></v-spacer>
                                             </div>
-                                        </v-row>
-                                        <v-card-text>
-                                            Now
-                                            <br>
-                                            <b style="font-size: 1.2rem; font-weight: 700; color: black;">Ksh {{ numeral( product.price).format("0,0") }}</b>
-                                        </v-card-text>
-                                        <v-card-actions>
 
-                                            <v-btn rounded color="black" style="color: aliceblue;" small @click="add_Cart = true,quantity=1,cartProduct = product">Add to cart <v-icon>mdi-cart</v-icon>
-                                            </v-btn>
+                                            <v-card-subtitle class="text-center">
+                                                <b style="font-size: 1.1rem; font-weight: 700; color: black;">{{ product.name }}</b>
+                                            </v-card-subtitle>
 
-                                        </v-card-actions>
-                                    </v-card>
+                                            <v-card-text class="text-center">
+                                                <v-rating :value="product.rating" color="amber" dense half-increments readonly size="14"></v-rating>
+                                                <div class="grey--text ms-4">{{ product.rating }}</div>
+                                                <br> Now <br>
+                                                <b style="font-size: 1.2rem; font-weight: 700; color: black;">
+                                                    Ksh {{ numeral(product.price).format("0,0.0") }}
+                                                </b>
+                                            </v-card-text>
+
+                                            <v-card-actions class="text-center">
+                                                <v-spacer></v-spacer>
+                                                <v-btn rounded color="black" style="color: aliceblue;" small @click="add_Cart = true, quantity = 1, cartProduct = product">
+                                                    Add to cart <v-icon>mdi-cart</v-icon>
+                                                </v-btn>
+                                                <v-spacer></v-spacer>
+                                            </v-card-actions>
+                                        </v-card>
+
 
                                 </div>
                             </div>
@@ -469,6 +474,7 @@ export default {
 
                 that.Fetch_CartList();
                 that.snackbar = true;
+                that.drawer2 = false;
                 that.snackbarText = "✅ Item removed from cart!";
                 that.showProgressCart = false;
                 console.log(res.data);
@@ -486,6 +492,7 @@ export default {
                 });
                 this.Fetch_CartList();
                 this.snackbar = true;
+                this.drawer2 = false;
                 this.snackbarText = "✅Cart cleard!";
                 this.showProgressCart = false;
                 console.log(res.data);
@@ -707,6 +714,28 @@ export default {
 </script>
 
 <style>
+
+
+.shop-layout {
+  height: 100vh;              /* full viewport */
+  display: flex;
+  flex-direction: column;
+}
+
+.shop-header {
+  flex: 0 0 auto;             /* stays fixed */
+}
+
+.shop-products {
+  flex: 1 1 auto;             /* take remaining space */
+  overflow-y: auto;           /* VERTICAL SCROLL */
+  overflow-x: hidden;
+  padding: 16px;
+}
+
+.shop-product {
+  margin-bottom: 16px;
+}
 #all_items4 {
     --scrollbarBG: #ffffff00;
     --thumbBG: #ffffff00;
