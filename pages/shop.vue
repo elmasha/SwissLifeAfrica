@@ -85,8 +85,7 @@
                             <span style="font-size: 0.8rem; margin:9px;font-weight: 900;"> B2B bulk purchase</span> <br>
                             <!-- :to="`b2b/${'JIWE18KXjOfWuDe2yweDrTPrFNm1'}`  -->
                             <v-btn large outlined rounded @click="checkBusiness()">
-                                B2B/Bulk
-                                <v-icon right dark>
+                                B2B/Bulk<v-icon right dark>
                                     mdi-truck-fast-outline
                                 </v-icon>
                             </v-btn>
