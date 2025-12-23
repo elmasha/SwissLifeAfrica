@@ -175,8 +175,6 @@
                                                 <b style="font-size: 1.1rem; font-weight: 700; color: black;">{{ product.name }}</b>
                                             </v-card-subtitle>
 
-                                        
-
                                             <v-card-text class="text-center">
                                                 <v-rating :value="product.rating" color="amber" dense half-increments readonly size="14"></v-rating>
                                                 <div class="grey--text ms-4">{{ product.rating }}</div>
@@ -187,9 +185,9 @@
                                             </v-card-text>
 
                                             <v-card-actions class="text-center">
-                                                   <v-spacer></v-spacer>
+                                                <v-spacer></v-spacer>
                                                 <v-btn rounded color="black" style="color: aliceblue;" small @click="add_Cart = true, quantity = 1, cartProduct = product">
-                                                    Add to cart <v-icon>mdi-cart</v-icon>
+                                                    Add to cart <v-icon>mdi-cart-plus</v-icon>
                                                 </v-btn>
                                                 <v-spacer></v-spacer>
                                             </v-card-actions>

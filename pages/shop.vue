@@ -140,7 +140,7 @@
                                             <v-card-actions class="text-center">
                                                 <v-spacer></v-spacer>
                                                 <v-btn rounded color="black" style="color: aliceblue;" small @click="add_Cart = true, quantity = 1, cartProduct = product">
-                                                    Add to cart <v-icon>mdi-cart</v-icon>
+                                                    Add to cart <v-icon>mdi-cart-plus</v-icon>
                                                 </v-btn>
                                                 <v-spacer></v-spacer>
                                             </v-card-actions>
